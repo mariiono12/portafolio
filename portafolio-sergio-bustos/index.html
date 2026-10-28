@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sergio Bustos | Desarrollador FullStack Jr.</title>
+
+  <!-- Fuentes Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Enlace al archivo CSS externo -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- SIDEBAR LATERAL -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="profile-avatar-wrapper">
+          <!-- Si tu foto está en la misma carpeta del index.html usa src="perfil.jpg" -->
+          <!-- Si está en una carpeta de imágenes usa src="assets/images/perfil.jpg" -->
+          <img src="perfil.jpg" alt="Sergio Bustos" class="profile-avatar-img">
+          <span class="status-indicator" title="Disponible para proyectos"></span>
+        </div>
+        <div class="profile-info">
+          <h1 class="profile-name">Sergio Bustos</h1>
+          <p class="profile-title">Desarrollador FullStack Jr.</p>
+          <span class="badge-status">
+            <i data-lucide="sparkles" class="icon-sm"></i> Skillnest Student 2026
+          </span>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <a href="#about" class="nav-link active" data-section="about">
+          <i data-lucide="user"></i> <span>01. Sobre Mí</span>
+        </a>
+        <a href="#skills" class="nav-link" data-section="skills">
+          <i data-lucide="cpu"></i> <span>02. Tecnologías</span>
+        </a>
+        <a href="#projects" class="nav-link" data-section="projects">
+          <i data-lucide="folder-git-2"></i> <span>03. Proyectos</span>
+        </a>
+        <a href="#video" class="nav-link" data-section="video">
+          <i data-lucide="video"></i> <span>04. Demo Video</span>
+        </a>
+        <a href="#lab" class="nav-link" data-section="lab">
+          <i data-lucide="code-2"></i> <span>05. Laboratorio JS</span>
+        </a>
+        <a href="#contact" class="nav-link" data-section="contact">
+          <i data-lucide="mail"></i> <span>06. Contacto</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="social-links">
+          <a href="https://linkedin.com" target="_blank" class="social-btn" title="LinkedIn">
+            <i data-lucide="linkedin"></i>
+          </a>
+          <a href="https://github.com" target="_blank" class="social-btn" title="GitHub">
+            <i data-lucide="github"></i>
+          </a>
+          <button id="quick-copy-email" class="social-btn" title="Copiar Correo">
+            <i data-lucide="copy"></i>
+          </button>
+        </div>
+        <p class="email-display">ian.bustos@gmail.com</p>
+      </div>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="main-content">
+
+      <button id="theme-toggle" class="theme-toggle-btn" aria-label="Cambiar Tema">
+        <i data-lucide="sun" class="sun-icon"></i>
+        <i data-lucide="moon" class="moon-icon"></i>
+      </button>
+
+      <!-- SOBRE MÍ -->
+      <section id="about" class="content-section">
+        <div class="section-tag"><i data-lucide="terminal"></i> index.html</div>
+        <h2 class="section-title">Sobre Mí & Enfoque</h2>
+        <div class="about-card card">
+          <p class="bio-text">
+            ¡Hola! Soy <strong>Sergio Bustos</strong>, un desarrollador de software enfocado en construir experiencias web limpias, funcionales e intuitivas. Actualmente me encuentro consolidando mi perfil FullStack en <strong>Skillnest</strong>, integrando buenas prácticas de maquetación, lógica modular y diseño adaptativo.
+          </p>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <span class="stat-num">100%</span>
+              <span class="stat-label">Compromiso</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">+15</span>
+              <span class="stat-label">Ejercicios JS</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">Git/GitHub</span>
+              <span class="stat-label">Flujo de Trabajo</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TECNOLOGÍAS -->
+      <section id="skills" class="content-section">
+        <div class="section-tag"><i data-lucide="layers"></i> stack.config.js</div>
+        <h2 class="section-title">Tecnologías & Herramientas</h2>
+        
+        <div class="skills-grid">
+          <div class="skill-card card">
+            <div class="skill-icon-header">
+              <i data-lucide="code" class="emerald-text"></i>
+              <h3>Frontend</h3>
+            </div>
+            <div class="tags-wrapper">
+              <span class="tag">HTML5 Semántico</span>
+              <span class="tag">CSS3 / Flexbox / Grid</span>
+              <span class="tag">JavaScript Moderno (ES6+)</span>
+              <span class="tag">Manipulación del DOM</span>
+              <span class="tag">Diseño Responsivo</span>
+            </div>
+          </div>
+
+          <div class="skill-card card">
+            <div class="skill-icon-header">
+              <i data-lucide="git-branch" class="amber-text"></i>
+              <h3>Herramientas & Control</h3>
+            </div>
+            <div class="tags-wrapper">
+              <span class="tag">Git & GitHub</span>
+              <span class="tag">GitHub Pages</span>
+              <span class="tag">VS Code</span>
+              <span class="tag">Figma Basics</span>
+              <span class="tag">Insomnia / Postman</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROYECTOS -->
+      <section id="projects" class="content-section">
+        <div class="section-tag"><i data-lucide="folder"></i> /proyectos</div>
+        <div class="section-header-flex">
+          <h2 class="section-title">Mis Proyectos</h2>
+          <div class="filter-controls">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="js">JavaScript</button>
+            <button class="filter-btn" data-filter="html-css">HTML/CSS</button>
+          </div>
+        </div>
+
+        <div class="projects-container">
+          <article class="project-card card" data-category="js">
+            <div class="project-img-placeholder">
+              <i data-lucide="image"></i>
+              <span>Vista previa Proyecto 1</span>
+            </div>
+            <div class="project-info">
+              <span class="project-cat">JavaScript / CSS Grid</span>
+              <h3 class="project-title">Nombre de tu Proyecto 1</h3>
+              <p class="project-desc">Escribe aquí una breve descripción del proyecto realizado en Skillnest.</p>
+              <div class="project-techs">
+                <span class="mini-tag">HTML5</span>
+                <span class="mini-tag">CSS3</span>
+                <span class="mini-tag">JavaScript</span>
+              </div>
+              <div class="project-actions">
+                <a href="#" target="_blank" class="btn btn-sm btn-outline"><i data-lucide="external-link"></i> Demo</a>
+                <a href="#" target="_blank" class="btn btn-sm btn-subtle"><i data-lucide="github"></i> Código</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card card" data-category="html-css">
+            <div class="project-img-placeholder">
+              <i data-lucide="layout"></i>
+              <span>Vista previa Proyecto 2</span>
+            </div>
+            <div class="project-info">
+              <span class="project-cat">HTML & CSS Responsivo</span>
+              <h3 class="project-title">Nombre de tu Proyecto 2</h3>
+              <p class="project-desc">Descripción del segundo proyecto.</p>
+              <div class="project-techs">
+                <span class="mini-tag">HTML5</span>
+                <span class="mini-tag">CSS Flexbox</span>
+              </div>
+              <div class="project-actions">
+                <a href="#" target="_blank" class="btn btn-sm btn-outline"><i data-lucide="external-link"></i> Demo</a>
+                <a href="#" target="_blank" class="btn btn-sm btn-subtle"><i data-lucide="github"></i> Código</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- DEMO VIDEO -->
+      <section id="video" class="content-section">
+        <div class="section-tag"><i data-lucide="play-circle"></i> pitch.mp4</div>
+        <h2 class="section-title">Video de Presentación</h2>
+        <div class="video-card card">
+          <div class="video-wrapper">
+            <iframe 
+              src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ" 
+              title="Presentación Sergio Bustos" 
+              allowfullscreen>
+            </iframe>
+          </div>
+          <div class="video-info">
+            <h3><i data-lucide="video" class="emerald-text"></i> Mi experiencia en Skillnest</h3>
+            <p>En este breve video presento mi proceso de aprendizaje y las tecnologías integradas.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- LABORATORIO JS -->
+      <section id="lab" class="content-section">
+        <div class="section-tag"><i data-lucide="flask-conical"></i> lab-interactivo.js</div>
+        <h2 class="section-title">Laboratorio Interactivo JS</h2>
+        
+        <div class="lab-grid">
+          <div class="lab-card card">
+            <div class="lab-header">
+              <i data-lucide="sparkles" class="emerald-text"></i>
+              <h3>Generador de Sombras Box-Shadow</h3>
+            </div>
+            <div class="lab-body">
+              <div class="control-group">
+                <label for="blur-input">Desenfoque (Blur): <span id="blur-val">15px</span></label>
+                <input type="range" id="blur-input" min="0" max="50" value="15">
+              </div>
+              <div class="control-group">
+                <label for="color-input">Color de Sombra:</label>
+                <input type="color" id="color-input" value="#10b981">
+              </div>
+              <div class="preview-box-container">
+                <div id="preview-box" class="preview-box">Caja de Prueba</div>
+              </div>
+              <div class="code-output">
+                <code id="css-code-output">box-shadow: 0px 10px 15px #10b981;</code>
+                <button id="copy-css-btn" class="btn btn-sm btn-subtle"><i data-lucide="copy"></i> Copiar</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="lab-card card">
+            <div class="lab-header">
+              <i data-lucide="type" class="amber-text"></i>
+              <h3>Analizador de Texto en Tiempo Real</h3>
+            </div>
+            <div class="lab-body">
+              <textarea id="text-counter-input" placeholder="Escribe un texto aquí..." rows="4"></textarea>
+              <div class="text-stats-grid">
+                <div class="mini-stat">
+                  <span id="char-count">0</span>
+                  <label>Caracteres</label>
+                </div>
+                <div class="mini-stat">
+                  <span id="word-count">0</span>
+                  <label>Palabras</label>
+                </div>
+                <div class="mini-stat">
+                  <span id="reading-time">0 min</span>
+                  <label>Tiempo Lectura</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACTO -->
+      <section id="contact" class="content-section">
+        <div class="section-tag"><i data-lucide="send"></i> contacto.form</div>
+        <h2 class="section-title">¡Hablemos!</h2>
+        
+        <div class="contact-card card">
+          <form id="contact-form" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Nombre Completo</label>
+                <input type="text" id="name" required placeholder="Tu nombre">
+                <span class="error-msg">Por favor ingresa tu nombre</span>
+              </div>
+              <div class="form-group">
+                <label for="email">Correo Electrónico</label>
+                <input type="email" id="email" required placeholder="tu@correo.com">
+                <span class="error-msg">Ingresa un correo válido</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="message">Mensaje</label>
+              <textarea id="message" rows="4" required placeholder="Escribe tu mensaje..."></textarea>
+              <span class="error-msg">El mensaje no puede estar vacío</span>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+              <i data-lucide="send"></i> Enviar Mensaje
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <p>© 2026 Sergio Bustos · Portafolio Desarrollador FullStack Jr. para Skillnest</p>
+      </footer>
+
+    </main>
+  </div>
+
+  <div id="toast" class="toast">
+    <i data-lucide="check-circle" class="emerald-text"></i>
+    <span id="toast-message">¡Mensaje enviado con éxito!</span>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
