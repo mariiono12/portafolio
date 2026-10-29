@@ -4,6 +4,14 @@ document.addEventListener('DOMContentLoaded', () => {
     lucide.createIcons();
   }
 
+  // Inicializar Animaciones al hacer Scroll (AOS)
+  if (window.AOS) {
+    AOS.init({
+      duration: 800,
+      once: true
+    });
+  }
+
   // 1. Selector de Tema (Dark / Light Mode)
   const themeToggleBtn = document.getElementById('theme-toggle');
   const htmlElement = document.documentElement;
@@ -13,13 +21,12 @@ document.addEventListener('DOMContentLoaded', () => {
     htmlElement.classList.toggle('dark');
   });
 
-  // 2. Scrollspy - Resaltado del Menú Lateral al Hacer Scroll
+  // 2. Scrollspy (Sincronización Menú Lateral)
   const sections = document.querySelectorAll('.content-section');
   const navLinks = document.querySelectorAll('.nav-link');
 
   window.addEventListener('scroll', () => {
     let currentSection = '';
-
     sections.forEach(section => {
       const sectionTop = section.offsetTop - 150;
       if (window.scrollY >= sectionTop) {
@@ -38,12 +45,30 @@ document.addEventListener('DOMContentLoaded', () => {
   // 3. Copiado Rápido de Correo
   const copyEmailBtn = document.getElementById('quick-copy-email');
   copyEmailBtn.addEventListener('click', () => {
-    navigator.clipboard.writeText('sergio.bustos@email.com').then(() => {
+    navigator.clipboard.writeText('ian.bustos@gmail.com').then(() => {
       showToast('¡Correo copiado al portapapeles!');
     });
   });
 
-  // 4. Filtro Dinámico de Proyectos
+  // 4. Contador Numérico Animado para la Sección "Sobre Mí"
+  const statNums = document.querySelectorAll('.stat-num[data-target]');
+  statNums.forEach(stat => {
+    const target = +stat.getAttribute('data-target');
+    let count = 0;
+    const updateCount = () => {
+      const increment = target / 50;
+      if (count < target) {
+        count += increment;
+        stat.textContent = Math.ceil(count) + (stat.getAttribute('data-target') === '100' ? '%' : '');
+        setTimeout(updateCount, 30);
+      } else {
+        stat.textContent = target + (stat.getAttribute('data-target') === '100' ? '%' : '');
+      }
+    };
+    updateCount();
+  });
+
+  // 5. Filtro de Proyectos
   const filterBtns = document.querySelectorAll('.filter-btn');
   const projectCards = document.querySelectorAll('.project-card');
 
@@ -64,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 5. Laboratorio JS - Generador de Sombras
+  // 6. Laboratorio JS - Generador de Sombras
   const blurInput = document.getElementById('blur-input');
   const colorInput = document.getElementById('color-input');
   const previewBox = document.getElementById('preview-box');
@@ -90,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 6. Laboratorio JS - Analizador de Texto
+  // 7. Laboratorio JS - Analizador de Texto
   const textInput = document.getElementById('text-counter-input');
   const charCount = document.getElementById('char-count');
   const wordCount = document.getElementById('word-count');
@@ -107,9 +132,8 @@ document.addEventListener('DOMContentLoaded', () => {
     readingTime.textContent = text.length > 0 ? `${minutes} min` : '0 min';
   });
 
-  // 7. Validación del Formulario de Contacto
+  // 8. Formulario de Contacto
   const contactForm = document.getElementById('contact-form');
-
   contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
     let isValid = true;
@@ -118,7 +142,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const email = document.getElementById('email');
     const message = document.getElementById('message');
 
-    // Validar Nombre
     if (name.value.trim() === '') {
       name.parentElement.classList.add('invalid');
       isValid = false;
@@ -126,7 +149,6 @@ document.addEventListener('DOMContentLoaded', () => {
       name.parentElement.classList.remove('invalid');
     }
 
-    // Validar Email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email.value.trim())) {
       email.parentElement.classList.add('invalid');
@@ -135,7 +157,6 @@ document.addEventListener('DOMContentLoaded', () => {
       email.parentElement.classList.remove('invalid');
     }
 
-    // Validar Mensaje
     if (message.value.trim() === '') {
       message.parentElement.classList.add('invalid');
       isValid = false;
@@ -149,7 +170,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Función Auxiliar: Notificaciones Toast
   function showToast(msg) {
     const toast = document.getElementById('toast');
     const toastMessage = document.getElementById('toast-message');

@@ -13,10 +13,17 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <!-- Enlace al archivo CSS externo -->
-  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- AOS CSS (Animaciones al hacer Scroll) -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Estilos CSS -->
+  <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
+
+  <!-- Luces de fondo dinámicas -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
 
   <div class="app-container">
     
@@ -24,8 +31,6 @@
     <aside class="sidebar">
       <div class="sidebar-header">
         <div class="profile-avatar-wrapper">
-          <!-- Si tu foto está en la misma carpeta del index.html usa src="perfil.jpg" -->
-          <!-- Si está en una carpeta de imágenes usa src="assets/images/perfil.jpg" -->
           <img src="perfil.jpg" alt="Sergio Bustos" class="profile-avatar-img">
           <span class="status-indicator" title="Disponible para proyectos"></span>
         </div>
@@ -61,15 +66,9 @@
 
       <div class="sidebar-footer">
         <div class="social-links">
-          <a href="https://linkedin.com" target="_blank" class="social-btn" title="LinkedIn">
-            <i data-lucide="linkedin"></i>
-          </a>
-          <a href="https://github.com" target="_blank" class="social-btn" title="GitHub">
-            <i data-lucide="github"></i>
-          </a>
-          <button id="quick-copy-email" class="social-btn" title="Copiar Correo">
-            <i data-lucide="copy"></i>
-          </button>
+          <a href="https://linkedin.com" target="_blank" class="social-btn" title="LinkedIn"><i data-lucide="linkedin"></i></a>
+          <a href="https://github.com" target="_blank" class="social-btn" title="GitHub"><i data-lucide="github"></i></a>
+          <button id="quick-copy-email" class="social-btn" title="Copiar Correo"><i data-lucide="copy"></i></button>
         </div>
         <p class="email-display">ian.bustos@gmail.com</p>
       </div>
@@ -84,20 +83,20 @@
       </button>
 
       <!-- SOBRE MÍ -->
-      <section id="about" class="content-section">
+      <section id="about" class="content-section" data-aos="fade-up">
         <div class="section-tag"><i data-lucide="terminal"></i> index.html</div>
         <h2 class="section-title">Sobre Mí & Enfoque</h2>
-        <div class="about-card card">
+        <div class="about-card card hover-tilt">
           <p class="bio-text">
             ¡Hola! Soy <strong>Sergio Bustos</strong>, un desarrollador de software enfocado en construir experiencias web limpias, funcionales e intuitivas. Actualmente me encuentro consolidando mi perfil FullStack en <strong>Skillnest</strong>, integrando buenas prácticas de maquetación, lógica modular y diseño adaptativo.
           </p>
           <div class="stats-grid">
             <div class="stat-item">
-              <span class="stat-num">100%</span>
+              <span class="stat-num" data-target="100">0%</span>
               <span class="stat-label">Compromiso</span>
             </div>
             <div class="stat-item">
-              <span class="stat-num">+15</span>
+              <span class="stat-num" data-target="15">0</span>
               <span class="stat-label">Ejercicios JS</span>
             </div>
             <div class="stat-item">
@@ -109,43 +108,43 @@
       </section>
 
       <!-- TECNOLOGÍAS -->
-      <section id="skills" class="content-section">
+      <section id="skills" class="content-section" data-aos="fade-up">
         <div class="section-tag"><i data-lucide="layers"></i> stack.config.js</div>
         <h2 class="section-title">Tecnologías & Herramientas</h2>
         
         <div class="skills-grid">
-          <div class="skill-card card">
+          <div class="skill-card card hover-tilt" data-aos="fade-right">
             <div class="skill-icon-header">
               <i data-lucide="code" class="emerald-text"></i>
               <h3>Frontend</h3>
             </div>
             <div class="tags-wrapper">
-              <span class="tag">HTML5 Semántico</span>
-              <span class="tag">CSS3 / Flexbox / Grid</span>
-              <span class="tag">JavaScript Moderno (ES6+)</span>
-              <span class="tag">Manipulación del DOM</span>
-              <span class="tag">Diseño Responsivo</span>
+              <span class="tag pulse-animation">HTML5 Semántico</span>
+              <span class="tag pulse-animation">CSS3 / Flexbox / Grid</span>
+              <span class="tag pulse-animation">JavaScript Moderno (ES6+)</span>
+              <span class="tag pulse-animation">Manipulación del DOM</span>
+              <span class="tag pulse-animation">Diseño Responsivo</span>
             </div>
           </div>
 
-          <div class="skill-card card">
+          <div class="skill-card card hover-tilt" data-aos="fade-left">
             <div class="skill-icon-header">
               <i data-lucide="git-branch" class="amber-text"></i>
               <h3>Herramientas & Control</h3>
             </div>
             <div class="tags-wrapper">
-              <span class="tag">Git & GitHub</span>
-              <span class="tag">GitHub Pages</span>
-              <span class="tag">VS Code</span>
-              <span class="tag">Figma Basics</span>
-              <span class="tag">Insomnia / Postman</span>
+              <span class="tag pulse-animation">Git & GitHub</span>
+              <span class="tag pulse-animation">GitHub Pages</span>
+              <span class="tag pulse-animation">VS Code</span>
+              <span class="tag pulse-animation">Figma Basics</span>
+              <span class="tag pulse-animation">Insomnia / Postman</span>
             </div>
           </div>
         </div>
       </section>
 
       <!-- PROYECTOS -->
-      <section id="projects" class="content-section">
+      <section id="projects" class="content-section" data-aos="fade-up">
         <div class="section-tag"><i data-lucide="folder"></i> /proyectos</div>
         <div class="section-header-flex">
           <h2 class="section-title">Mis Proyectos</h2>
@@ -157,7 +156,7 @@
         </div>
 
         <div class="projects-container">
-          <article class="project-card card" data-category="js">
+          <article class="project-card card hover-tilt" data-category="js" data-aos="zoom-in">
             <div class="project-img-placeholder">
               <i data-lucide="image"></i>
               <span>Vista previa Proyecto 1</span>
@@ -178,7 +177,7 @@
             </div>
           </article>
 
-          <article class="project-card card" data-category="html-css">
+          <article class="project-card card hover-tilt" data-category="html-css" data-aos="zoom-in" data-aos-delay="100">
             <div class="project-img-placeholder">
               <i data-lucide="layout"></i>
               <span>Vista previa Proyecto 2</span>
@@ -201,10 +200,10 @@
       </section>
 
       <!-- DEMO VIDEO -->
-      <section id="video" class="content-section">
+      <section id="video" class="content-section" data-aos="fade-up">
         <div class="section-tag"><i data-lucide="play-circle"></i> pitch.mp4</div>
         <h2 class="section-title">Video de Presentación</h2>
-        <div class="video-card card">
+        <div class="video-card card hover-tilt">
           <div class="video-wrapper">
             <iframe 
               src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ" 
@@ -220,12 +219,12 @@
       </section>
 
       <!-- LABORATORIO JS -->
-      <section id="lab" class="content-section">
+      <section id="lab" class="content-section" data-aos="fade-up">
         <div class="section-tag"><i data-lucide="flask-conical"></i> lab-interactivo.js</div>
         <h2 class="section-title">Laboratorio Interactivo JS</h2>
         
         <div class="lab-grid">
-          <div class="lab-card card">
+          <div class="lab-card card hover-tilt">
             <div class="lab-header">
               <i data-lucide="sparkles" class="emerald-text"></i>
               <h3>Generador de Sombras Box-Shadow</h3>
@@ -249,7 +248,7 @@
             </div>
           </div>
 
-          <div class="lab-card card">
+          <div class="lab-card card hover-tilt">
             <div class="lab-header">
               <i data-lucide="type" class="amber-text"></i>
               <h3>Analizador de Texto en Tiempo Real</h3>
@@ -276,11 +275,11 @@
       </section>
 
       <!-- CONTACTO -->
-      <section id="contact" class="content-section">
+      <section id="contact" class="content-section" data-aos="fade-up">
         <div class="section-tag"><i data-lucide="send"></i> contacto.form</div>
         <h2 class="section-title">¡Hablemos!</h2>
         
-        <div class="contact-card card">
+        <div class="contact-card card hover-tilt">
           <form id="contact-form" novalidate>
             <div class="form-row">
               <div class="form-group">
@@ -299,7 +298,7 @@
               <textarea id="message" rows="4" required placeholder="Escribe tu mensaje..."></textarea>
               <span class="error-msg">El mensaje no puede estar vacío</span>
             </div>
-            <button type="submit" class="btn btn-primary btn-block">
+            <button type="submit" class="btn btn-primary btn-block ripple-effect">
               <i data-lucide="send"></i> Enviar Mensaje
             </button>
           </form>
@@ -318,6 +317,8 @@
     <span id="toast-message">¡Mensaje enviado con éxito!</span>
   </div>
 
+  <!-- Script AOS (Animaciones) -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script src="main.js"></script>
 </body>
 </html>
