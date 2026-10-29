@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Inicializar Iconos
   if (window.lucide) {
     lucide.createIcons();
   }
@@ -23,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Filtro de Proyectos
   const pills = document.querySelectorAll('.pill');
-  const projectCards = document.querySelectorAll('.project-card');
+  const projectCards = document.querySelectorAll('.project-bento-card');
 
   pills.forEach(pill => {
     pill.addEventListener('click', () => {
