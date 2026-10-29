@@ -4,14 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     lucide.createIcons();
   }
 
-  // Inicializar Animaciones al hacer Scroll (AOS)
-  if (window.AOS) {
-    AOS.init({
-      duration: 800,
-      once: true
-    });
-  }
-
   // 1. Selector de Tema (Dark / Light Mode)
   const themeToggleBtn = document.getElementById('theme-toggle');
   const htmlElement = document.documentElement;
@@ -21,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     htmlElement.classList.toggle('dark');
   });
 
-  // 2. Scrollspy (Sincronización Menú Lateral)
+  // 2. Scrollspy - Resaltado Menú Lateral
   const sections = document.querySelectorAll('.content-section');
   const navLinks = document.querySelectorAll('.nav-link');
 
@@ -50,25 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 4. Contador Numérico Animado para la Sección "Sobre Mí"
-  const statNums = document.querySelectorAll('.stat-num[data-target]');
-  statNums.forEach(stat => {
-    const target = +stat.getAttribute('data-target');
-    let count = 0;
-    const updateCount = () => {
-      const increment = target / 50;
-      if (count < target) {
-        count += increment;
-        stat.textContent = Math.ceil(count) + (stat.getAttribute('data-target') === '100' ? '%' : '');
-        setTimeout(updateCount, 30);
-      } else {
-        stat.textContent = target + (stat.getAttribute('data-target') === '100' ? '%' : '');
-      }
-    };
-    updateCount();
-  });
-
-  // 5. Filtro de Proyectos
+  // 4. Filtro de Proyectos
   const filterBtns = document.querySelectorAll('.filter-btn');
   const projectCards = document.querySelectorAll('.project-card');
 
@@ -89,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 6. Laboratorio JS - Generador de Sombras
+  // 5. Laboratorio JS - Generador de Sombras
   const blurInput = document.getElementById('blur-input');
   const colorInput = document.getElementById('color-input');
   const previewBox = document.getElementById('preview-box');
@@ -115,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 7. Laboratorio JS - Analizador de Texto
+  // 6. Laboratorio JS - Analizador de Texto
   const textInput = document.getElementById('text-counter-input');
   const charCount = document.getElementById('char-count');
   const wordCount = document.getElementById('word-count');
@@ -132,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
     readingTime.textContent = text.length > 0 ? `${minutes} min` : '0 min';
   });
 
-  // 8. Formulario de Contacto
+  // 7. Formulario de Contacto
   const contactForm = document.getElementById('contact-form');
   contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
