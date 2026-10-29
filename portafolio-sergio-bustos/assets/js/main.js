@@ -1,9 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // Inicialización de Iconos Lucide
   if (window.lucide) {
     lucide.createIcons();
   }
 
-  // Modo Oscuro / Claro
+  // 1. Selector de Tema (Dark / Light Mode)
   const themeToggleBtn = document.getElementById('theme-toggle');
   const htmlElement = document.documentElement;
 
@@ -12,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     htmlElement.classList.toggle('dark');
   });
 
-  // Copia Rápida de Correo
+  // 2. Copia Rápida de Correo con Toast
   const copyEmailBtn = document.getElementById('copy-email-btn');
   copyEmailBtn.addEventListener('click', () => {
     navigator.clipboard.writeText('ian.bustos@gmail.com').then(() => {
@@ -20,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Filtro de Proyectos
+  // 3. Filtro de Categorías en Proyectos
   const pills = document.querySelectorAll('.pill');
   const projectCards = document.querySelectorAll('.project-bento-card');
 
@@ -40,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // JS Lab: Sombras
+  // 4. Laboratorio JS - Generador de Sombras
   const blurRange = document.getElementById('blur-range');
   const blurVal = document.getElementById('blur-val');
   const shadowPreview = document.getElementById('shadow-preview');
@@ -57,11 +58,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   copyCodeBtn.addEventListener('click', () => {
     navigator.clipboard.writeText(cssCode.textContent).then(() => {
-      showToast('¡CSS Copiado!');
+      showToast('¡Código CSS Copiado!');
     });
   });
 
-  // JS Lab: Analizador de Texto Real-Time
+  // 5. Laboratorio JS - Analizador de Texto en Tiempo Real
   const labText = document.getElementById('lab-text');
   const charCount = document.getElementById('char-count');
   const wordCount = document.getElementById('word-count');
@@ -78,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
     readTime.textContent = text.length > 0 ? `${minutes} min` : '0 min';
   });
 
-  // Formulario Contacto
+  // 6. Validación de Formulario de Contacto
   const contactForm = document.getElementById('contact-form');
   contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -86,9 +87,9 @@ document.addEventListener('DOMContentLoaded', () => {
     contactForm.reset();
   });
 
-  // Toast Helper
+  // Notificación Toast Helper
   function showToast(msg) {
-    const toast = document.getElementById('toast');
+    const toast = document.getElementByIsd('toast');
     const toastText = document.getElementById('toast-text');
     toastText.textContent = msg;
     toast.classList.add('show');

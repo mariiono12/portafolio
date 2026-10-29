@@ -10,43 +10,53 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 
-  <!-- Lucide Icons -->
+  <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
 
-  <!-- Background Orbs -->
+  <!-- Esferas luminosas de fondo -->
   <div class="bg-orb orb-1"></div>
   <div class="bg-orb orb-2"></div>
 
   <div class="app-dashboard">
     
-    <!-- PANEL IZQUIERDO FIJO (HERO & PERFIL STICKY) -->
+    <!-- PANEL IZQUIERDO FIJO (HERO & CONTACTO LATERAL STICKY) -->
     <aside class="sidebar-hero">
       <div class="profile-card">
-        <div class="status-badge">
-          <span class="status-dot"></span> Disponible 2026
-        </div>
-        
-        <div class="avatar-wrapper">
-          <img src="perfil.jpg" alt="Sergio Bustos" class="avatar-img">
-        </div>
+        <div class="profile-top">
+          <div class="status-badge">
+            <span class="status-dot"></span> Disponible 2026
+          </div>
+          
+          <div class="avatar-wrapper">
+            <img src="perfil.jpg" alt="Sergio Bustos" class="avatar-img">
+          </div>
 
-        <h1 class="profile-name">Sergio Bustos</h1>
-        <p class="profile-role">&lt;FullStack Dev Jr. /&gt;</p>
-        <p class="profile-bio">
-          Especializado en maquetación interactiva, arquitectura JS modular y experiencias web fluidas de alto rendimiento.
-        </p>
+          <h1 class="profile-name">Sergio Bustos</h1>
+          <p class="profile-role">&lt;FullStack Dev Jr. /&gt;</p>
+          <p class="profile-bio">
+            Especializado en maquetación interactiva, arquitectura JS modular y experiencias web fluidas de alto rendimiento.
+          </p>
+        </div>
 
         <div class="profile-actions">
           <button id="copy-email-btn" class="btn btn-primary pulse-btn">
             <i data-lucide="copy"></i> Copiar Correo
           </button>
+          
           <div class="social-row">
-            <a href="https://github.com" target="_blank" class="btn-icon" title="GitHub"><i data-lucide="github"></i></a>
-            <a href="https://linkedin.com" target="_blank" class="btn-icon" title="LinkedIn"><i data-lucide="linkedin"></i></a>
+            <a href="https://github.com" target="_blank" class="btn-icon" title="GitHub">
+              <i data-lucide="github"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" class="btn-icon" title="LinkedIn">
+              <i data-lucide="linkedin"></i>
+            </a>
+            <a href="mailto:ian.bustos@gmail.com" class="btn-icon" title="Enviar Email">
+              <i data-lucide="mail"></i>
+            </a>
             <button id="theme-toggle" class="btn-icon" title="Cambiar Tema">
               <i data-lucide="sun" class="sun-icon"></i>
               <i data-lucide="moon" class="moon-icon"></i>
@@ -56,7 +66,7 @@
       </div>
     </aside>
 
-    <!-- PANEL DERECHO (CONTENIDO BENTO / DASHBOARD) -->
+    <!-- PANEL DERECHO (CONTENIDO BENTO CON ESPACIADO ESPACIOSO) -->
     <main class="main-content">
 
       <!-- NAVEGACIÓN RÁPIDA -->
@@ -64,11 +74,11 @@
         <a href="#stack" class="nav-chip">01. Stack</a>
         <a href="#projects" class="nav-chip">02. Proyectos</a>
         <a href="#lab" class="nav-chip">03. Lab JS</a>
-        <a href="#video" class="nav-chip">04. Video Pitch</a>
+        <a href="#video" class="nav-chip">04. Pitch Video</a>
         <a href="#contact" class="nav-chip">05. Contacto</a>
       </nav>
 
-      <!-- SECCIÓN 1: STACK TÉCNICO (RETÍCULA PRINCIPAL) -->
+      <!-- SECCIÓN 1: STACK TÉCNICO -->
       <section id="stack" class="dashboard-block">
         <div class="block-header">
           <i data-lucide="cpu" class="accent-icon"></i>
@@ -98,12 +108,12 @@
         </div>
       </section>
 
-      <!-- SECCIÓN 2: PROYECTOS (DESTACADOS DE IMPACTO) -->
+      <!-- SECCIÓN 2: CATÁLOGO DE PROYECTOS (TARJETAS AMPLIAS) -->
       <section id="projects" class="dashboard-block">
         <div class="block-header-flex">
           <div class="block-header">
             <i data-lucide="folder-code" class="accent-icon"></i>
-            <h2>02 / Proyectos Destacados</h2>
+            <h2>02 / Catálogo de Proyectos</h2>
           </div>
           <div class="filter-pills">
             <button class="pill active" data-filter="all">Todos</button>
@@ -114,6 +124,10 @@
 
         <div class="projects-grid">
           <article class="project-bento-card" data-category="js">
+            <div class="project-preview-head">
+              <i data-lucide="sparkles" class="accent-icon"></i>
+              <span>Interactive App</span>
+            </div>
             <div class="project-top">
               <span class="project-tag">&lt;JS Modular / LocalStorage /&gt;</span>
               <h3>Sistema Interactivo JS</h3>
@@ -133,6 +147,10 @@
           </article>
 
           <article class="project-bento-card" data-category="css">
+            <div class="project-preview-head">
+              <i data-lucide="layout" class="accent-icon"></i>
+              <span>Responsive UI</span>
+            </div>
             <div class="project-top">
               <span class="project-tag">&lt;CSS Grid / Layout /&gt;</span>
               <h3>Dashboard Adaptativo</h3>
@@ -153,7 +171,7 @@
         </div>
       </section>
 
-      <!-- SECCIÓN 3: LABORATORIO JS (WIDGETS INTERACTIVOS) -->
+      <!-- SECCIÓN 3: LABORATORIO JS -->
       <section id="lab" class="dashboard-block">
         <div class="block-header">
           <i data-lucide="flask-conical" class="accent-icon"></i>
@@ -171,7 +189,7 @@
             </div>
             <div class="code-box">
               <code id="css-code">box-shadow: 0px 10px 15px rgba(6,182,212,0.4);</code>
-              <button id="copy-code-btn" class="btn-icon-sm"><i data-lucide="copy"></i></button>
+              <button id="copy-code-btn" class="btn-icon-sm" title="Copiar CSS"><i data-lucide="copy"></i></button>
             </div>
           </div>
 
