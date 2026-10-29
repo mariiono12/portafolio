@@ -1,263 +1,260 @@
 <!DOCTYPE html>
-<html lang="es" class="dark">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sergio Bustos | Full Stack Developer Jr.</title>
-
-  <!-- Google Fonts: Syne & Plus Jakarta Sans -->
+  <title>Sergio Bustos | Portafolio Desarrollador Web</title>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-
-  <!-- Lucide Icons CDN -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-
+  <link href="https://fonts.googleapis.com/css2?family=Impact&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
 
-  <!-- Esferas luminosas de fondo -->
-  <div class="bg-orb orb-1"></div>
-  <div class="bg-orb orb-2"></div>
+  <!-- Transición de pantalla estilo Persona 5 -->
+  <div id="p5-transition" class="p5-transition-overlay">
+    <div class="p5-transition-stripe">
+      <span class="p5-transition-text">TAKE YOUR TIME</span>
+    </div>
+  </div>
 
-  <div class="app-dashboard">
-    
-    <!-- PANEL IZQUIERDO FIJO (HERO & CONTACTO LATERAL STICKY) -->
-    <aside class="sidebar-hero">
-      <div class="profile-card">
-        <div class="profile-top">
-          <div class="status-badge">
-            <span class="status-dot"></span> Disponible 2026
-          </div>
-          
-          <div class="avatar-wrapper">
-            <img src="perfil.jpg" alt="Sergio Bustos" class="avatar-img">
-          </div>
+  <!-- Header Superior -->
+  <header class="header">
+    <div class="logo">
+      <span class="star">★</span> SERGIO BUSTOS <span class="logo-sub">| DESARROLLADOR FULLSTACK Jr.</span>
+    </div>
+  </header>
 
-          <h1 class="profile-name">Sergio Bustos</h1>
-          <p class="profile-role">&lt;FullStack Dev Jr. /&gt;</p>
-          <p class="profile-bio">
-            Especializado en maquetación interactiva, arquitectura JS modular y experiencias web fluidas de alto rendimiento.
-          </p>
-        </div>
+  <!-- RUEDA RADIAL DE COMANDOS -->
+  <div class="p5-wheel-container">
+    <div class="wheel-center-badge">
+      <span>MENU</span>
+    </div>
 
-        <div class="profile-actions">
-          <button id="copy-email-btn" class="btn btn-primary pulse-btn">
-            <i data-lucide="copy"></i> Copiar Correo
-          </button>
-          
-          <div class="social-row">
-            <a href="https://github.com" target="_blank" class="btn-icon" title="GitHub">
-              <i data-lucide="github"></i>
-            </a>
-            <a href="https://linkedin.com" target="_blank" class="btn-icon" title="LinkedIn">
-              <i data-lucide="linkedin"></i>
-            </a>
-            <a href="mailto:ian.bustos@gmail.com" class="btn-icon" title="Enviar Email">
-              <i data-lucide="mail"></i>
-            </a>
-            <button id="theme-toggle" class="btn-icon" title="Cambiar Tema">
-              <i data-lucide="sun" class="sun-icon"></i>
-              <i data-lucide="moon" class="moon-icon"></i>
-            </button>
-          </div>
-        </div>
+    <div class="p5-wheel" id="p5-wheel">
+      <a href="#sobre-mi" class="wheel-item item-1 p5-nav-link active" data-angle="0">
+        <span class="cmd-box">👤 SOBRE MÍ</span>
+      </a>
+      <a href="#proyectos" class="wheel-item item-2 p5-nav-link" data-angle="-90">
+        <span class="cmd-box">📂 PROYECTOS</span>
+      </a>
+      <a href="#tecnologias" class="wheel-item item-3 p5-nav-link" data-angle="-180">
+        <span class="cmd-box">⚡ TECNOLOGIA</span>
+      </a>
+      <a href="#contacto" class="wheel-item item-4 p5-nav-link" data-angle="-270">
+        <span class="cmd-box">📧 CONTACTO</span>
+      </a>
+    </div>
+  </div>
+
+  <main class="main-container">
+
+    <!-- 1. Presentación Personal -->
+    <section id="sobre-mi" class="hero fade-in p5-panel pos-left">
+      <div class="status-badge">
+        <span class="pulse-dot"></span> ESTADO :: DISPONIBLE PARA TRABAJAR
       </div>
-    </aside>
 
-    <!-- PANEL DERECHO (CONTENIDO BENTO CON ESPACIADO ESPACIOSO) -->
-    <main class="main-content">
+      <h1 class="p5-title">
+        <span class="box-black">HOLA,</span>
+        <span class="box-red">SOY</span>
+        <span class="box-white">SERGIO BUSTOS</span>
+      </h1>
+      
+      <div class="typewriter-container">
+        <span id="typewriter-text"></span><span class="cursor">█</span>
+      </div>
 
-      <!-- NAVEGACIÓN RÁPIDA -->
-      <nav class="quick-nav">
-        <a href="#stack" class="nav-chip">01. Stack</a>
-        <a href="#projects" class="nav-chip">02. Proyectos</a>
-        <a href="#lab" class="nav-chip">03. Lab JS</a>
-        <a href="#video" class="nav-chip">04. Pitch Video</a>
-        <a href="#contact" class="nav-chip">05. Contacto</a>
-      </nav>
+      <p class="bio">
+        Desarrollador Web en formación en el programa <strong>Skillnest</strong>. Me especializo en construir aplicaciones funcionales integrando la lógica de backend en <strong>Python y Flask</strong>, estructuración de bases de datos relacionales en <strong>MySQL</strong> y maquetación web limpia e interactiva.
+      </p>
 
-      <!-- SECCIÓN 1: STACK TÉCNICO -->
-      <section id="stack" class="dashboard-block">
-        <div class="block-header">
-          <i data-lucide="cpu" class="accent-icon"></i>
-          <h2>01 / Stack & Habilidades</h2>
-        </div>
-        <div class="stack-grid">
-          <div class="bento-box">
-            <h4>Frontend Moderno</h4>
-            <div class="tags-cloud">
-              <span class="tag">HTML5 Semántico</span>
-              <span class="tag">CSS Grid / Flexbox</span>
-              <span class="tag">JavaScript ES6+</span>
-              <span class="tag">Manipulación DOM</span>
-              <span class="tag">Diseño Responsivo</span>
+      <div class="hero-actions">
+        <a href="https://linkedin.com/in/tu-perfil" target="_blank" rel="noopener" class="btn p5-btn-red">LINKEDIN 🔗</a>
+        <a href="https://github.com/mariiono12" target="_blank" rel="noopener" class="btn p5-btn-black">GITHUB 🐙</a>
+      </div>
+    </section>
+
+    <!-- 2. Proyectos Destacados (Zig-Zag) -->
+    <section id="proyectos" class="section fade-in p5-panel pos-right">
+      <h2 class="p5-heading">Proyectos desarrollados</h2>
+      <p class="section-subtext">Sistemas web desarrollados durante el programa Skillnest:</p>
+
+      <div class="projects-asymmetric-container">
+
+        <article class="project-card card-left">
+          <div class="card-badge">BACKEND / SQL</div>
+          <div class="project-info">
+            <h3>REGISTRO MUCHOS A MUCHOS</h3>
+            <p>Aplicación en Flask para gestionar asociaciones relacionales complejas de muchos a muchos en MySQL, con sistema de registro, validación de datos y autenticación de usuarios.</p>
+            <div class="tags">
+              <span>Python</span>
+              <span>Flask</span>
+              <span>MySQL</span>
             </div>
+            <a href="https://github.com/mariiono12/Skillnest_fullStack_Python/tree/main/python/flask/fundamentos/28.-Registro_muchos_a_muchos" target="_blank" rel="noopener" class="btn-project">
+              VER CÓDIGO EN GITHUB ↗
+            </a>
           </div>
-          <div class="bento-box">
-            <h4>Herramientas & Workflow</h4>
-            <div class="tags-cloud">
-              <span class="tag">Git & GitHub</span>
-              <span class="tag">VS Code</span>
-              <span class="tag">Terminal CLI</span>
-              <span class="tag">Figma UI Specs</span>
-              <span class="tag">GitHub Pages</span>
+        </article>
+
+        <article class="project-card card-right">
+          <div class="card-badge">FULL STACK</div>
+          <div class="project-info">
+            <h3>BOOKHUB</h3>
+            <p>Plataforma para comunidad de lectura y gestión de catálogo desarrollada con Flask. Incluye sistema de reseñas, gestión de usuarios y operaciones CRUD integradas a MySQL Workbench.</p>
+            <div class="tags">
+              <span>Python</span>
+              <span>Flask</span>
+              <span>MySQL</span>
+              <span>CSS3</span>
             </div>
+            <a href="https://github.com/mariiono12/Skillnest_fullStack_Python/tree/main/python/flask/fundamentos/bookhub" target="_blank" rel="noopener" class="btn-project">
+              VER CÓDIGO EN GITHUB ↗
+            </a>
           </div>
-        </div>
-      </section>
+        </article>
 
-      <!-- SECCIÓN 2: CATÁLOGO DE PROYECTOS (TARJETAS AMPLIAS) -->
-      <section id="projects" class="dashboard-block">
-        <div class="block-header-flex">
-          <div class="block-header">
-            <i data-lucide="folder-code" class="accent-icon"></i>
-            <h2>02 / Catálogo de Proyectos</h2>
-          </div>
-          <div class="filter-pills">
-            <button class="pill active" data-filter="all">Todos</button>
-            <button class="pill" data-filter="js">JavaScript</button>
-            <button class="pill" data-filter="css">CSS Grid</button>
-          </div>
-        </div>
+      </div>
+    </section>
 
-        <div class="projects-grid">
-          <article class="project-bento-card" data-category="js">
-            <div class="project-preview-head">
-              <i data-lucide="sparkles" class="accent-icon"></i>
-              <span>Interactive App</span>
-            </div>
-            <div class="project-top">
-              <span class="project-tag">&lt;JS Modular / LocalStorage /&gt;</span>
-              <h3>Sistema Interactivo JS</h3>
-              <p>Aplicación web dinámica enfocada en manipulación limpia del DOM, gestión de estados y persistencia local.</p>
-            </div>
-            <div class="project-bottom">
-              <div class="mini-techs">
-                <span>HTML5</span>
-                <span>CSS3</span>
-                <span>JavaScript</span>
-              </div>
-              <div class="project-links">
-                <a href="#" target="_blank" class="btn btn-sm btn-primary"><i data-lucide="external-link"></i> Demo</a>
-                <a href="#" target="_blank" class="btn btn-sm btn-outline"><i data-lucide="github"></i> Código</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="project-bento-card" data-category="css">
-            <div class="project-preview-head">
-              <i data-lucide="layout" class="accent-icon"></i>
-              <span>Responsive UI</span>
-            </div>
-            <div class="project-top">
-              <span class="project-tag">&lt;CSS Grid / Layout /&gt;</span>
-              <h3>Dashboard Adaptativo</h3>
-              <p>Maquetación profesional responsiva construida con CSS Grid y Flexbox para experiencias multidispositivo.</p>
-            </div>
-            <div class="project-bottom">
-              <div class="mini-techs">
-                <span>HTML5</span>
-                <span>CSS Grid</span>
-                <span>Flexbox</span>
-              </div>
-              <div class="project-links">
-                <a href="#" target="_blank" class="btn btn-sm btn-primary"><i data-lucide="external-link"></i> Demo</a>
-                <a href="#" target="_blank" class="btn btn-sm btn-outline"><i data-lucide="github"></i> Código</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- SECCIÓN 3: LABORATORIO JS -->
-      <section id="lab" class="dashboard-block">
-        <div class="block-header">
-          <i data-lucide="flask-conical" class="accent-icon"></i>
-          <h2>03 / Laboratorio Técnico Interactivo</h2>
-        </div>
-        <div class="lab-grid">
-          <div class="bento-box">
-            <h4><i data-lucide="sliders"></i> Generador de Sombras CSS</h4>
-            <div class="control-group">
-              <label>Blur: <span id="blur-val">15px</span></label>
-              <input type="range" id="blur-range" min="0" max="40" value="15">
-            </div>
-            <div class="preview-container">
-              <div id="shadow-preview" class="shadow-preview">Preview Box</div>
-            </div>
-            <div class="code-box">
-              <code id="css-code">box-shadow: 0px 10px 15px rgba(6,182,212,0.4);</code>
-              <button id="copy-code-btn" class="btn-icon-sm" title="Copiar CSS"><i data-lucide="copy"></i></button>
-            </div>
-          </div>
-
-          <div class="bento-box">
-            <h4><i data-lucide="text-cursor-input"></i> Analizador de Texto</h4>
-            <textarea id="lab-text" placeholder="Escribe aquí para analizar en tiempo real..." rows="4"></textarea>
-            <div class="stats-counter">
-              <div class="stat-unit"><span id="char-count">0</span><label>Caracteres</label></div>
-              <div class="stat-unit"><span id="word-count">0</span><label>Palabras</label></div>
-              <div class="stat-unit"><span id="read-time">0 min</span><label>Lectura</label></div>
-            </div>
+    <!-- 3. Tecnologías y Habilidades -->
+    <section id="tecnologias" class="section fade-in p5-panel pos-left">
+      <h2 class="p5-heading">Tecnologías y habilidades</h2>
+      <p class="section-subtext">Pasa el cursor sobre cada tarjeta para inspeccionar el nivel de dominio técnico:</p>
+      
+      <div class="skills-mosaic-full">
+        
+        <div class="skill-card card-skew-1">
+          <span class="skill-name">PYTHON</span>
+          <span class="skill-level">Backend</span>
+          <div class="skill-tooltip">
+            <strong>PYTHON</strong>
+            <p>Lógica de servidor, programación orientada a objetos, scripts y estructuración de librerías.</p>
           </div>
         </div>
-      </section>
 
-      <!-- SECCIÓN 4: VIDEO PITCH -->
-      <section id="video" class="dashboard-block">
-        <div class="block-header">
-          <i data-lucide="play-circle" class="accent-icon"></i>
-          <h2>04 / Pitch Video</h2>
-        </div>
-        <div class="bento-box video-box">
-          <div class="video-wrapper">
-            <iframe src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ" title="Presentación Sergio Bustos" allowfullscreen></iframe>
+        <div class="skill-card card-skew-2">
+          <span class="skill-name">FLASK</span>
+          <span class="skill-level">Framework</span>
+          <div class="skill-tooltip">
+            <strong>FLASK</strong>
+            <p>Rutas dinámicas, plantillas Jinja2, arquitectura MVC, gestión de sesiones y cookies.</p>
           </div>
         </div>
-      </section>
 
-      <!-- SECCIÓN 5: CONTACTO -->
-      <section id="contact" class="dashboard-block">
-        <div class="block-header">
-          <i data-lucide="send" class="accent-icon"></i>
-          <h2>05 / Contacto Directo</h2>
+        <div class="skill-card card-skew-3">
+          <span class="skill-name">MYSQL</span>
+          <span class="skill-level">Base de Datos</span>
+          <div class="skill-tooltip">
+            <strong>MYSQL</strong>
+            <p>Modelado ER, consultas relacionales, Joins y relaciones N:M complejas.</p>
+          </div>
         </div>
-        <div class="bento-box">
-          <form id="contact-form">
-            <div class="form-row">
-              <div class="form-group">
-                <label for="name">Nombre</label>
-                <input type="text" id="name" required placeholder="Tu nombre">
-              </div>
-              <div class="form-group">
-                <label for="email">Correo</label>
-                <input type="email" id="email" required placeholder="tu@correo.com">
-              </div>
+
+        <div class="skill-card card-skew-1">
+          <span class="skill-name">HTML5</span>
+          <span class="skill-level">Frontend</span>
+          <div class="skill-tooltip">
+            <strong>HTML5</strong>
+            <p>Estructuración semántica de páginas web, accesibilidad y maquetación limpia.</p>
+          </div>
+        </div>
+
+        <div class="skill-card card-skew-3">
+          <span class="skill-name">CSS3</span>
+          <span class="skill-level">Estilos</span>
+          <div class="skill-tooltip">
+            <strong>CSS3</strong>
+            <p>Flexbox, Grid, animaciones customizadas, transformaciones y variables CSS.</p>
+          </div>
+        </div>
+
+        <div class="skill-card card-skew-2">
+          <span class="skill-name">JAVASCRIPT</span>
+          <span class="skill-level">Lógica</span>
+          <div class="skill-tooltip">
+            <strong>JAVASCRIPT</strong>
+            <p>Manipulación dinámica del DOM, eventos asíncronos e interacción de usuario.</p>
+          </div>
+        </div>
+
+        <div class="skill-card card-skew-1">
+          <span class="skill-name">GIT</span>
+          <span class="skill-level">DevOps</span>
+          <div class="skill-tooltip">
+            <strong>GIT</strong>
+            <p>Control de versiones local, ramas, mergings y commits estructurados.</p>
+          </div>
+        </div>
+
+        <div class="skill-card card-skew-3">
+          <span class="skill-name">GITHUB</span>
+          <span class="skill-level">Nube</span>
+          <div class="skill-tooltip">
+            <strong>GITHUB</strong>
+            <p>Repositorios remotos, proyectos colaborativos, documentación y Pages.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 4. Contacto (Formulario Corregido) -->
+    <section id="contacto" class="section fade-in p5-panel pos-center">
+      <h2 class="p5-heading">Contacto</h2>
+      
+      <div class="calling-card-expanded">
+        <div class="card-stamp">TAKE YOUR HEART</div>
+        <p class="calling-card-intro">Envía tu propuesta de proyecto directamente a través del formulario o copia mi correo:</p>
+
+        <form id="contact-form" class="p5-form">
+          <div class="form-group-row">
+            <div class="form-group">
+              <label for="name">NOMBRE / EMPRESA</label>
+              <input type="text" id="name" placeholder="Tu nombre..." required>
             </div>
             <div class="form-group">
-              <label for="message">Mensaje</label>
-              <textarea id="message" rows="4" required placeholder="Escribe tu mensaje o propuesta..."></textarea>
+              <label for="email">CORREO ELECTRÓNICO</label>
+              <input type="email" id="email" placeholder="tu@correo.com..." required>
             </div>
-            <button type="submit" class="btn btn-primary btn-block"><i data-lucide="send"></i> Enviar Mensaje</button>
-          </form>
+          </div>
+
+          <div class="form-group">
+            <label for="subject">ASUNTO</label>
+            <input type="text" id="subject" placeholder="Propuesta laboral / Proyecto..." required>
+          </div>
+
+          <div class="form-group">
+            <label for="message">MENSAJE</label>
+            <textarea id="message" rows="3" placeholder="Escribe los detalles aquí..." required></textarea>
+          </div>
+
+          <!-- Mensaje de éxito arriba del botón -->
+          <div id="form-success-alert" class="form-success-alert">
+            <span>★ CALLING CARD SENT! Tu mensaje ha sido enviado exitosamente. ★</span>
+          </div>
+
+          <button type="submit" id="btn-send-message" class="btn-send-p5">ENVIAR MENSAJE ✉</button>
+        </form>
+
+        <div class="email-direct-box">
+          <span class="email-label">CORREO DIRECTO:</span>
+          <a href="mailto:ian.bustos213@gmail.com" id="email-text" class="email-link">ian.bustos213@gmail.com</a>
+          <button id="copy-btn" class="btn-copy" type="button" title="Copiar correo">📋 COPIAR</button>
         </div>
-      </section>
+        <span id="copy-message" class="copy-message">¡Correo copiado al portapapeles!</span>
+      </div>
+    </section>
 
-      <footer class="footer">
-        <p>© 2026 Sergio Bustos · Full Stack Developer Jr.</p>
-      </footer>
+  </main>
 
-    </main>
+  <footer>
+    <p>© 2026 - Creado por <span>Sergio Bustos</span> durante el programa Skillnest.</p>
+  </footer>
 
-  </div>
-
-  <div id="toast" class="toast">
-    <i data-lucide="check-circle-2" class="accent-icon"></i>
-    <span id="toast-text">Acción completada</span>
-  </div>
-
-  <script src="main.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
