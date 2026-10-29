@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // Inicializar Iconos
   if (window.lucide) {
     lucide.createIcons();
   }
@@ -50,8 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
   blurRange.addEventListener('input', () => {
     const val = blurRange.value;
     blurVal.textContent = `${val}px`;
-    const shadowStr = `box-shadow: 0px 10px ${val}px rgba(6,182,212,0.3);`;
-    shadowPreview.style.boxShadow = `0px 10px ${val}px rgba(6,182,212,0.3)`;
+    const shadowStr = `box-shadow: 0px 10px ${val}px rgba(6,182,212,0.4);`;
+    shadowPreview.style.boxShadow = `0px 10px ${val}px rgba(6,182,212,0.4)`;
     cssCode.textContent = shadowStr;
   });
 
