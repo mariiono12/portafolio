@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Inicializar Iconos Lucide
   if (window.lucide) {
     lucide.createIcons();
   }
@@ -13,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     htmlElement.classList.toggle('dark');
   });
 
-  // Copiado Rápido de Correo
+  // Copia Rápida de Correo
   const copyEmailBtn = document.getElementById('copy-email-btn');
   copyEmailBtn.addEventListener('click', () => {
     navigator.clipboard.writeText('ian.bustos@gmail.com').then(() => {
@@ -23,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Filtro de Proyectos
   const pills = document.querySelectorAll('.pill');
-  const projectItems = document.querySelectorAll('.project-item');
+  const projectCards = document.querySelectorAll('.project-card');
 
   pills.forEach(pill => {
     pill.addEventListener('click', () => {
@@ -31,11 +30,11 @@ document.addEventListener('DOMContentLoaded', () => {
       pill.classList.add('active');
 
       const filter = pill.getAttribute('data-filter');
-      projectItems.forEach(item => {
-        if (filter === 'all' || item.getAttribute('data-category') === filter) {
-          item.style.display = 'flex';
+      projectCards.forEach(card => {
+        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+          card.style.display = 'flex';
         } else {
-          item.style.display = 'none';
+          card.style.display = 'none';
         }
       });
     });
@@ -44,20 +43,39 @@ document.addEventListener('DOMContentLoaded', () => {
   // JS Lab: Sombras
   const blurRange = document.getElementById('blur-range');
   const blurVal = document.getElementById('blur-val');
-  const shadowBox = document.getElementById('shadow-box');
+  const shadowPreview = document.getElementById('shadow-preview');
+  const cssCode = document.getElementById('css-code');
+  const copyCodeBtn = document.getElementById('copy-code-btn');
 
   blurRange.addEventListener('input', () => {
     const val = blurRange.value;
     blurVal.textContent = `${val}px`;
-    shadowBox.style.boxShadow = `0px 5px ${val}px rgba(6, 182, 212, 0.4)`;
+    const shadowStr = `box-shadow: 0px 10px ${val}px rgba(6,182,212,0.3);`;
+    shadowPreview.style.boxShadow = `0px 10px ${val}px rgba(6,182,212,0.3)`;
+    cssCode.textContent = shadowStr;
   });
 
-  // JS Lab: Contador de Caracteres
-  const labTextarea = document.getElementById('lab-textarea');
-  const charNum = document.getElementById('char-num');
+  copyCodeBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText(cssCode.textContent).then(() => {
+      showToast('¡CSS Copiado!');
+    });
+  });
 
-  labTextarea.addEventListener('input', () => {
-    charNum.textContent = labTextarea.value.length;
+  // JS Lab: Analizador de Texto Real-Time
+  const labText = document.getElementById('lab-text');
+  const charCount = document.getElementById('char-count');
+  const wordCount = document.getElementById('word-count');
+  const readTime = document.getElementById('read-time');
+
+  labText.addEventListener('input', () => {
+    const text = labText.value;
+    charCount.textContent = text.length;
+
+    const words = text.trim().split(/\s+/).filter(w => w.length > 0);
+    wordCount.textContent = words.length;
+
+    const minutes = Math.ceil(words.length / 200);
+    readTime.textContent = text.length > 0 ? `${minutes} min` : '0 min';
   });
 
   // Formulario Contacto
@@ -68,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
     contactForm.reset();
   });
 
-  // Función Notificación Toast
+  // Toast Helper
   function showToast(msg) {
     const toast = document.getElementById('toast');
     const toastText = document.getElementById('toast-text');
