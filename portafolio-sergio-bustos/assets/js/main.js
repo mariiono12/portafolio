@@ -17,10 +17,39 @@ if (themeBtn) {
 
 // TRANSICIÓN DE CORTINA Y NAVEGACIÓN
 const overlay = document.getElementById('p5-transition');
+const wheelItems = document.querySelectorAll('.wheel-item');
+const compactNavigation = window.matchMedia('(max-width: 1100px)');
+
+function updateWheelPositions(selectedItem) {
+  const selectedIndex = Array.from(wheelItems).indexOf(selectedItem);
+  if (selectedIndex < 0) return;
+
+  wheelItems.forEach((item, index) => {
+    if (compactNavigation.matches) {
+      item.style.left = '';
+      item.style.top = '';
+    } else {
+      const angle = ((index - selectedIndex) * 90 * Math.PI) / 180;
+      const x = Math.round(Math.cos(angle) * 80);
+      const y = Math.round(Math.sin(angle) * 80);
+      item.style.left = `calc(50% + ${x}px)`;
+      item.style.top = `calc(50% + ${y}px)`;
+    }
+    item.classList.toggle('active', index === selectedIndex);
+  });
+}
+
+if (wheelItems.length > 0) {
+  updateWheelPositions(document.querySelector('.wheel-item.active') || wheelItems[0]);
+  window.addEventListener('resize', () => {
+    updateWheelPositions(document.querySelector('.wheel-item.active') || wheelItems[0]);
+  });
+}
 
 function triggerP5Transition(targetId, onComplete) {
   if (!overlay) return;
 
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   overlay.classList.remove('exit');
   overlay.classList.add('active');
 
@@ -32,12 +61,12 @@ function triggerP5Transition(targetId, onComplete) {
       }
     }
     if (onComplete) onComplete();
-  }, 320);
+  }, reducedMotion ? 0 : 400);
 
   setTimeout(() => {
     overlay.classList.add('exit');
     overlay.classList.remove('active');
-  }, 650);
+  }, reducedMotion ? 0 : 780);
 }
 
 // Interceptar enlaces con hash (#)
@@ -47,13 +76,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     if (targetId && targetId !== '#') {
       e.preventDefault();
 
-      const wheel = document.getElementById('p5-wheel');
-      const angle = link.getAttribute('data-angle');
-      if (wheel && angle !== null) {
-        wheel.style.transform = `rotate(${angle}deg)`;
-        document.querySelectorAll('.wheel-item').forEach(i => i.classList.remove('active'));
-        link.classList.add('active');
-      }
+      if (link.classList.contains('wheel-item')) updateWheelPositions(link);
 
       triggerP5Transition(targetId);
     }
@@ -62,8 +85,6 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 
 // Sincronización de la Rueda al hacer Scroll Manual
 const sections = document.querySelectorAll('section');
-const wheelItems = document.querySelectorAll('.wheel-item');
-const wheel = document.getElementById('p5-wheel');
 
 window.addEventListener('scroll', () => {
   let currentSection = '';
@@ -74,50 +95,11 @@ window.addEventListener('scroll', () => {
     }
   });
 
-  if (wheelItems.length > 0 && wheel) {
-    wheelItems.forEach(item => {
-      const targetId = item.getAttribute('href');
-      if (targetId === `#${currentSection}`) {
-        item.classList.add('active');
-        const angle = item.getAttribute('data-angle');
-        if (angle !== null) {
-          wheel.style.transform = `rotate(${angle}deg)`;
-        }
-      } else {
-        item.classList.remove('active');
-      }
-    });
+  if (wheelItems.length > 0) {
+    const activeItem = Array.from(wheelItems).find(item => item.getAttribute('href') === `#${currentSection}`);
+    if (activeItem) updateWheelPositions(activeItem);
   }
 });
-
-// PROCESAMIENTO DEL FORMULARIO DE CONTACTO (EVENTO SUBMIT DIRECTO)
-const contactForm = document.getElementById('contact-form');
-const successAlert = document.getElementById('form-success-alert');
-
-if (contactForm) {
-  contactForm.addEventListener('submit', function(e) {
-    // 1. Detener navegación y recarga por completo
-    e.preventDefault();
-    e.stopPropagation();
-
-    // 2. Mostrar la alerta de confirmación
-    if (successAlert) {
-      successAlert.classList.add('show');
-    }
-
-    // 3. Limpiar todos los campos
-    contactForm.reset();
-
-    // 4. Ocultar la alerta pasados 4 segundos
-    setTimeout(() => {
-      if (successAlert) {
-        successAlert.classList.remove('show');
-      }
-    }, 4000);
-
-    return false;
-  });
-}
 
 // COPIAR CORREO AL PORTAPAPELES
 const copyBtn = document.getElementById('copy-btn');
@@ -125,15 +107,39 @@ const emailTextElement = document.getElementById('email-text');
 const copyMessage = document.getElementById('copy-message');
 
 if (copyBtn && emailTextElement) {
-  copyBtn.addEventListener('click', () => {
-    navigator.clipboard.writeText(emailTextElement.textContent).then(() => {
-      if (copyMessage) {
-        copyMessage.classList.add('show');
-        setTimeout(() => {
-          copyMessage.classList.remove('show');
-        }, 2500);
+  copyBtn.addEventListener('click', async () => {
+    const email = emailTextElement.textContent.trim();
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(email);
+      } else {
+        const temporaryInput = document.createElement('textarea');
+        temporaryInput.value = email;
+        temporaryInput.setAttribute('readonly', '');
+        temporaryInput.style.position = 'absolute';
+        temporaryInput.style.left = '-9999px';
+        document.body.appendChild(temporaryInput);
+        temporaryInput.select();
+        const copied = document.execCommand('copy');
+        temporaryInput.remove();
+        if (!copied) throw new Error('No se pudo copiar el correo.');
       }
-    });
+
+      if (copyMessage) {
+        copyMessage.textContent = '¡Correo copiado al portapapeles!';
+        copyMessage.classList.add('show');
+      }
+    } catch (error) {
+      if (copyMessage) {
+        copyMessage.textContent = 'No se pudo copiar. Selecciona el correo y cópialo manualmente.';
+        copyMessage.classList.add('show');
+      }
+      console.error('Error al copiar el correo de contacto:', error);
+    }
+
+    if (copyMessage) {
+      setTimeout(() => copyMessage.classList.remove('show'), 2500);
+    }
   });
 }
 
