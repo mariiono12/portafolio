@@ -2,280 +2,209 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sergio Bustos | Portafolio Desarrollador Web</title>
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111111">
+  <meta name="description" content="Portafolio de Sergio Bustos, desarrollador web en formación. Proyectos con Python, Flask, MySQL y tecnologías frontend.">
+  <title>Sergio Bustos — Desarrollador web</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Impact&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/styles.css">
+  <script src="assets/js/main.js" defer></script>
 </head>
 <body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
-  <!-- Transición de pantalla estilo Persona 5 -->
-  <div id="p5-transition" class="p5-transition-overlay">
-    <div class="p5-transition-stripe">
-      <span class="p5-transition-text">TAKE YOUR TIME</span>
-    </div>
+  <div class="page-noise" aria-hidden="true"></div>
+  <div class="transition-curtain" id="transition-curtain" aria-hidden="true">
+    <span>TAKE YOUR TIME</span>
   </div>
 
-  <!-- Header Superior -->
-  <header class="header">
-    <div class="logo">
-      <span class="star">★</span> SERGIO BUSTOS <span class="logo-sub">| DESARROLLADOR FULLSTACK Jr.</span>
-    </div>
+  <header class="site-header">
+    <a class="wordmark" href="#inicio" aria-label="Sergio Bustos, inicio">
+      <span class="wordmark-star" aria-hidden="true">★</span>
+      <span>SERGIO<span class="wordmark-dot">.</span></span>
+    </a>
+    <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="menu-toggle-label">MENÚ</span>
+      <span class="menu-toggle-icon" aria-hidden="true"><i></i><i></i></span>
+    </button>
+    <nav class="site-nav" id="site-nav" aria-label="Navegación principal">
+      <a href="#inicio" class="nav-link is-active">Inicio</a>
+      <a href="#sobre-mi" class="nav-link">Sobre mí</a>
+      <a href="#proyectos" class="nav-link">Proyectos</a>
+      <a href="#habilidades" class="nav-link">Habilidades</a>
+      <a href="#contacto" class="nav-cta">Hablemos <span aria-hidden="true">↗</span></a>
+    </nav>
   </header>
 
-  <!-- RUEDA RADIAL DE COMANDOS -->
-  <div class="p5-wheel-container">
-    <div class="wheel-center-badge">
-      <span>MENU</span>
+  <main id="contenido">
+    <section class="hero section-wrap" id="inicio" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-line"></span> PORTAFOLIO · DESARROLLO WEB</p>
+        <p class="availability"><span class="availability-dot"></span> DISPONIBLE PARA NUEVOS DESAFÍOS</p>
+        <h1 class="hero-title" id="hero-title">
+          <span>HOLA,</span>
+          <span class="hero-title-red">SOY SERGIO</span>
+          <span class="hero-title-outline">BUSTOS<span class="title-period">.</span></span>
+        </h1>
+        <p class="hero-role"><span id="typewriter-text">Desarrollador Web Full Stack</span><span class="typewriter-cursor" aria-hidden="true">_</span></p>
+        <p class="hero-description">
+          Construyo aplicaciones web conectando <strong>Python y Flask</strong> en el backend con bases de datos <strong>MySQL</strong> e interfaces claras y funcionales.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-red" href="#proyectos">VER PROYECTOS <span aria-hidden="true">↓</span></a>
+          <a class="button button-dark" href="https://github.com/mariiono12" target="_blank" rel="noopener noreferrer">GITHUB <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="hero-details">
+          <span><b>FORMACIÓN</b> Full Stack Python · Skillnest</span>
+          <span><b>ENFOQUE</b> Backend · Datos · Web</span>
+        </div>
+      </div>
+      <div class="hero-art" aria-label="Retrato de Sergio Bustos">
+        <div class="hero-art-shape" aria-hidden="true"></div>
+        <div class="hero-photo-frame">
+          <img src="assets/images/me.jpg" alt="Retrato de Sergio Bustos" width="600" height="720">
+          <span class="photo-caption">SERGIO BUSTOS · DEV</span>
+        </div>
+        <span class="hero-sticker" aria-hidden="true">TAKE<br>YOUR<br>TIME</span>
+        <span class="hero-index" aria-hidden="true">01 / 04</span>
+      </div>
+      <a class="scroll-cue" href="#sobre-mi"><span></span> DESLIZA PARA EXPLORAR</a>
+    </section>
+
+    <div class="ticker" aria-label="Tecnologías principales">
+      <div class="ticker-track" aria-hidden="true">
+        <span>PYTHON</span><i>✦</i><span>FLASK</span><i>✦</i><span>MYSQL</span><i>✦</i><span>DESARROLLO WEB</span><i>✦</i>
+        <span>PYTHON</span><i>✦</i><span>FLASK</span><i>✦</i><span>MYSQL</span><i>✦</i><span>DESARROLLO WEB</span><i>✦</i>
+      </div>
     </div>
 
-    <div class="p5-wheel" id="p5-wheel">
-      <a href="#sobre-mi" class="wheel-item item-1 p5-nav-link active" data-angle="0">
-        <span class="cmd-box">👤 SOBRE MÍ</span>
-      </a>
-      <a href="#proyectos" class="wheel-item item-2 p5-nav-link" data-angle="-90">
-        <span class="cmd-box">📂 PROYECTOS</span>
-      </a>
-      <a href="#tecnologias" class="wheel-item item-3 p5-nav-link" data-angle="-180">
-        <span class="cmd-box">⚡ TECNOLOGIA</span>
-      </a>
-      <a href="#contacto" class="wheel-item item-4 p5-nav-link" data-angle="-270">
-        <span class="cmd-box">📧 CONTACTO</span>
-      </a>
-    </div>
-  </div>
-
-  <main class="main-container">
-
-    <!-- 1. Presentación Personal -->
-    <section id="sobre-mi" class="hero fade-in p5-panel pos-left">
-      <div class="status-badge">
-        <span class="pulse-dot"></span> ESTADO :: DISPONIBLE PARA TRABAJAR
+    <section class="about section-wrap section-block" id="sobre-mi" aria-labelledby="about-title">
+      <div class="section-marker"><span>01</span> PERFIL</div>
+      <div class="about-content">
+        <div class="section-heading">
+          <p class="eyebrow">MÁS QUE CÓDIGO</p>
+          <h2 id="about-title">IDEAS CLARAS.<br><span>BUENAS SOLUCIONES.</span></h2>
+        </div>
+        <div class="about-copy">
+          <p class="about-lead">Estoy formándome como desarrollador web Full Stack en el programa Skillnest y disfruto convertir problemas en herramientas útiles.</p>
+          <p>En mis proyectos trabajo desde el diseño de datos y la lógica de servidor hasta la interfaz que usa cada persona. Me gusta aprender haciendo, cuidar los detalles y entender cómo cada parte encaja con las demás.</p>
+          <a class="text-link" href="#contacto">CONOCE MI TRABAJO <span aria-hidden="true">↘</span></a>
+        </div>
       </div>
-
-      <h1 class="p5-title">
-        <span class="box-black">HOLA,</span>
-        <span class="box-red">SOY</span>
-        <span class="box-white">SERGIO BUSTOS</span>
-      </h1>
-      
-      <div class="typewriter-container">
-        <span id="typewriter-text"></span><span class="cursor">█</span>
-      </div>
-
-      <p class="bio">
-        Desarrollador Web en formación en el programa <strong>Skillnest</strong>. Me especializo en construir aplicaciones funcionales integrando la lógica de backend en <strong>Python y Flask</strong>, estructuración de bases de datos relacionales en <strong>MySQL</strong> y maquetación web limpia e interactiva.
-      </p>
-
-      <div class="hero-actions">
-        <a href="https://www.linkedin.com/in/sergio-bustos-859973414/" target="_blank" rel="noopener noreferrer" class="btn p5-btn-red">LINKEDIN 🔗</a>
-        <a href="https://github.com/mariiono12" target="_blank" rel="noopener" class="btn p5-btn-black">GITHUB 🐙</a>
-      </div>
-    </section>
-
-    <!-- 2. Proyectos Destacados (Zig-Zag) -->
-    <section id="proyectos" class="section fade-in p5-panel pos-right">
-      <h2 class="p5-heading">Proyectos desarrollados</h2>
-      <p class="section-subtext">Sistemas web desarrollados durante el programa Skillnest:</p>
-
-      <div class="projects-asymmetric-container">
-
-        <article class="project-card card-left">
-          <div class="card-badge">BACKEND / SQL</div>
-          <div class="project-info">
-            <h3>REGISTRO MUCHOS A MUCHOS</h3>
-            <p>Aplicación en Flask para gestionar asociaciones relacionales complejas de muchos a muchos en MySQL, con sistema de registro, validación de datos y autenticación de usuarios.</p>
-            <div class="tags">
-              <span>Python</span>
-              <span>Flask</span>
-              <span>MySQL</span>
-            </div>
-            <a href="https://github.com/mariiono12/Skillnest_fullStack_Python/tree/main/python/flask/fundamentos/28.-Registro_muchos_a_muchos" target="_blank" rel="noopener" class="btn-project">
-              VER CÓDIGO EN GITHUB ↗
-            </a>
-          </div>
+      <div class="about-principles">
+        <article class="principle-card">
+          <span class="principle-number">01 / BACKEND</span>
+          <h3>Lógica que resuelve</h3>
+          <p>Rutas, validaciones y funcionalidades con Python y Flask.</p>
         </article>
-
-        <article class="project-card card-right">
-          <div class="card-badge">FULL STACK</div>
-          <div class="project-info">
-            <h3>BOOKHUB</h3>
-            <p>Plataforma para comunidad de lectura y gestión de catálogo desarrollada con Flask. Incluye sistema de reseñas, gestión de usuarios y operaciones CRUD integradas a MySQL Workbench.</p>
-            <div class="tags">
-              <span>Python</span>
-              <span>Flask</span>
-              <span>MySQL</span>
-              <span>CSS3</span>
-            </div>
-            <a href="https://github.com/mariiono12/Skillnest_fullStack_Python/tree/main/python/flask/fundamentos/bookhub" target="_blank" rel="noopener" class="btn-project">
-              VER CÓDIGO EN GITHUB ↗
-            </a>
-          </div>
+        <article class="principle-card">
+          <span class="principle-number">02 / DATOS</span>
+          <h3>Relaciones con sentido</h3>
+          <p>Modelado y consultas MySQL para aplicaciones conectadas.</p>
         </article>
-
+        <article class="principle-card">
+          <span class="principle-number">03 / FRONTEND</span>
+          <h3>Hecho para personas</h3>
+          <p>Interfaces web claras, accesibles y adaptables a cada pantalla.</p>
+        </article>
       </div>
     </section>
 
-    <!-- 3. Tecnologías y Habilidades -->
-    <section id="tecnologias" class="section fade-in p5-panel pos-left">
-      <h2 class="p5-heading">Tecnologías y habilidades</h2>
-      <p class="section-subtext">Tecnologías y herramientas utilizadas en el desarrollo de aplicaciones web:</p>
-      
-      <div class="skills-mosaic-full">
-        
-        <div class="skill-card card-skew-1">
-          <span class="skill-name">PYTHON</span>
-          <span class="skill-level">Backend</span>
-          <div class="skill-tooltip">
-            <strong>PYTHON</strong>
-            <p>Lógica de servidor, programación orientada a objetos, scripts y estructuración de librerías.</p>
+    <section class="projects section-block" id="proyectos" aria-labelledby="projects-title">
+      <div class="section-wrap">
+        <div class="section-marker"><span>02</span> ARCHIVO DE PROYECTOS</div>
+        <div class="projects-heading">
+          <div class="section-heading">
+            <p class="eyebrow">TRABAJO SELECCIONADO</p>
+            <h2 id="projects-title">PROYECTOS<br><span>CON PROPÓSITO.</span></h2>
           </div>
+          <p>Experimentos y aplicaciones desarrollados durante mi formación Full Stack.</p>
         </div>
 
-        <div class="skill-card card-skew-2">
-          <span class="skill-name">FLASK</span>
-          <span class="skill-level">Framework</span>
-          <div class="skill-tooltip">
-            <strong>FLASK</strong>
-            <p>Microframework de Python para construir aplicaciones web y gestionar rutas.</p>
-          </div>
-        </div>
+        <div class="project-grid">
+          <article class="project-card project-card-featured">
+            <a class="project-image-link" href="https://github.com/mariiono12/Skillnest_fullStack_Python/tree/main/python/flask/fundamentos/28.-Registro_muchos_a_muchos" target="_blank" rel="noopener noreferrer" aria-label="Ver código de Registro muchos a muchos en GitHub">
+              <img src="assets/images/INSCRIPCION_MUCHO.png" alt="Interfaz del proyecto Registro muchos a muchos" width="1200" height="700" loading="lazy">
+              <span class="project-image-index">PROJECT 01</span>
+              <span class="project-image-arrow" aria-hidden="true">↗</span>
+            </a>
+            <div class="project-meta"><span>FLASK APPLICATION</span><span>01 — 02</span></div>
+            <div class="project-content">
+              <h3>Registro muchos<br>a muchos<span>.</span></h3>
+              <p>Aplicación para gestionar asociaciones relacionales muchos a muchos. Incluye registro, validación de datos y autenticación de usuarios.</p>
+              <div class="tag-list"><span>PYTHON</span><span>FLASK</span><span>MYSQL</span></div>
+              <a class="project-link" href="https://github.com/mariiono12/Skillnest_fullStack_Python/tree/main/python/flask/fundamentos/28.-Registro_muchos_a_muchos" target="_blank" rel="noopener noreferrer">EXPLORAR CÓDIGO <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
 
-        <div class="skill-card card-skew-3">
-          <span class="skill-name">PIPENV / PIP</span>
-          <span class="skill-level">Entornos y dependencias</span>
-          <div class="skill-tooltip">
-            <strong>PIPENV / PIP</strong>
-            <p>Gestión de paquetes, dependencias y entornos virtuales para proyectos Python.</p>
-          </div>
+          <article class="project-card">
+            <a class="project-image-link" href="https://github.com/mariiono12/Skillnest_fullStack_Python/tree/main/python/flask/fundamentos/bookhub" target="_blank" rel="noopener noreferrer" aria-label="Ver código de BookHub en GitHub">
+              <img src="assets/images/bookhub.png" alt="Interfaz de la plataforma BookHub" width="1200" height="700" loading="lazy">
+              <span class="project-image-index">PROJECT 02</span>
+              <span class="project-image-arrow" aria-hidden="true">↗</span>
+            </a>
+            <div class="project-meta"><span>FULL STACK PLATFORM</span><span>02 — 02</span></div>
+            <div class="project-content">
+              <h3>BookHub<span>.</span></h3>
+              <p>Plataforma para una comunidad lectora, con catálogo de libros, reseñas, gestión de usuarios y operaciones CRUD conectadas a MySQL.</p>
+              <div class="tag-list"><span>PYTHON</span><span>FLASK</span><span>MYSQL</span><span>CSS</span></div>
+              <a class="project-link" href="https://github.com/mariiono12/Skillnest_fullStack_Python/tree/main/python/flask/fundamentos/bookhub" target="_blank" rel="noopener noreferrer">EXPLORAR CÓDIGO <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
         </div>
-
-        <div class="skill-card card-skew-1">
-          <span class="skill-name">PYTHON-DOTENV</span>
-          <span class="skill-level">Configuración</span>
-          <div class="skill-tooltip">
-            <strong>PYTHON-DOTENV</strong>
-            <p>Carga variables de entorno desde archivos .env para separar la configuración y las credenciales del código.</p>
-          </div>
-        </div>
-
-        <div class="skill-card card-skew-2">
-          <span class="skill-name">FLASK-BCRYPT</span>
-          <span class="skill-level">Seguridad</span>
-          <div class="skill-tooltip">
-            <strong>FLASK-BCRYPT</strong>
-            <p>Generación y verificación de hashes seguros para proteger contraseñas.</p>
-          </div>
-        </div>
-
-        <div class="skill-card card-skew-3">
-          <span class="skill-name">JINJA2</span>
-          <span class="skill-level">Plantillas</span>
-          <div class="skill-tooltip">
-            <strong>JINJA2</strong>
-            <p>Renderizado de plantillas HTML dinámicas e integración de datos desde Flask.</p>
-          </div>
-        </div>
-
-        <div class="skill-card card-skew-3">
-          <span class="skill-name">MYSQL</span>
-          <span class="skill-level">Base de Datos</span>
-          <div class="skill-tooltip">
-            <strong>MYSQL</strong>
-            <p>Modelado ER, consultas relacionales, Joins y relaciones N:M complejas.</p>
-          </div>
-        </div>
-
-        <div class="skill-card card-skew-1">
-          <span class="skill-name">PYMYSQL</span>
-          <span class="skill-level">Conector de base de datos</span>
-          <div class="skill-tooltip">
-            <strong>PYMYSQL</strong>
-            <p>Conexión de aplicaciones Python con bases de datos MySQL y ejecución de consultas.</p>
-          </div>
-        </div>
-
-        <div class="skill-card card-skew-1">
-          <span class="skill-name">HTML5</span>
-          <span class="skill-level">Frontend</span>
-          <div class="skill-tooltip">
-            <strong>HTML5</strong>
-            <p>Estructuración semántica de páginas web, accesibilidad y maquetación limpia.</p>
-          </div>
-        </div>
-
-        <div class="skill-card card-skew-3">
-          <span class="skill-name">CSS3</span>
-          <span class="skill-level">Estilos</span>
-          <div class="skill-tooltip">
-            <strong>CSS3</strong>
-            <p>CSS puro para maquetación, diseño adaptable, animaciones y estilos; incluye tipografías de Google Fonts.</p>
-          </div>
-        </div>
-
-        <div class="skill-card card-skew-2">
-          <span class="skill-name">JAVASCRIPT</span>
-          <span class="skill-level">Lógica</span>
-          <div class="skill-tooltip">
-            <strong>JAVASCRIPT</strong>
-            <p>Manipulación dinámica del DOM, eventos asíncronos e interacción de usuario.</p>
-          </div>
-        </div>
-
-        <div class="skill-card card-skew-1">
-          <span class="skill-name">GIT</span>
-          <span class="skill-level">DevOps</span>
-          <div class="skill-tooltip">
-            <strong>GIT</strong>
-            <p>Control de versiones local, ramas y commits; configuración de archivos .gitignore.</p>
-          </div>
-        </div>
-
-        <div class="skill-card card-skew-3">
-          <span class="skill-name">GITHUB</span>
-          <span class="skill-level">Nube</span>
-          <div class="skill-tooltip">
-            <strong>GITHUB</strong>
-            <p>Repositorios remotos, proyectos colaborativos, documentación y Pages.</p>
-          </div>
-        </div>
-
+        <a class="all-projects-link" href="https://github.com/mariiono12" target="_blank" rel="noopener noreferrer">MÁS EN GITHUB <span aria-hidden="true">↗</span></a>
       </div>
     </section>
 
-    <!-- 4. Contacto -->
-    <section id="contacto" class="section fade-in p5-panel pos-center">
-      <h2 class="p5-heading">Contacto</h2>
-      
-      <div class="calling-card-expanded">
-        <div class="card-stamp">TAKE YOUR HEART</div>
-        <p class="calling-card-intro">¿Hablamos de un proyecto o una oportunidad? Escríbeme directamente por correo.</p>
+    <section class="skills section-wrap section-block" id="habilidades" aria-labelledby="skills-title">
+      <div class="section-marker"><span>03</span> EQUIPO</div>
+      <div class="skills-layout">
+        <div class="section-heading">
+          <p class="eyebrow">HERRAMIENTAS DE TRABAJO</p>
+          <h2 id="skills-title">MI STACK<span>.</span></h2>
+          <p class="skills-intro">Tecnologías que estoy utilizando y fortaleciendo en proyectos reales.</p>
+        </div>
+        <div class="skill-groups">
+          <div class="skill-group">
+            <h3><span>01</span> BACKEND</h3>
+            <div class="skill-chips"><span>Python</span><span>Flask</span><span>Jinja2</span><span>Flask-Bcrypt</span><span>PyMySQL</span><span>python-dotenv</span></div>
+          </div>
+          <div class="skill-group">
+            <h3><span>02</span> DATOS</h3>
+            <div class="skill-chips"><span>MySQL</span><span>Relaciones N:M</span><span>Consultas SQL</span></div>
+          </div>
+          <div class="skill-group">
+            <h3><span>03</span> WEB &amp; HERRAMIENTAS</h3>
+            <div class="skill-chips"><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Git</span><span>GitHub</span><span>Pip / Pipenv</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="skills-note"><span aria-hidden="true">✦</span> APRENDIZAJE CONTINUO, PROYECTO A PROYECTO.</div>
+    </section>
 
+    <section class="contact section-block" id="contacto" aria-labelledby="contact-title">
+      <div class="contact-shape" aria-hidden="true"></div>
+      <div class="section-wrap contact-inner">
+        <div class="section-marker"><span>04</span> SIGUIENTE MISIÓN</div>
+        <p class="eyebrow">¿TIENES ALGO EN MENTE?</p>
+        <h2 id="contact-title">HAGAMOS<br><span>ALGO BUENO.</span></h2>
+        <p class="contact-copy">Abierto a conversar sobre proyectos, oportunidades y nuevas ideas.</p>
         <div class="contact-actions">
-          <a class="btn-send-p5" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=ian.bustos213@gmail.com&amp;su=Contacto%20desde%20mi%20portafolio&amp;body=Hola%20Sergio%2C%0A%0AMe%20gustar%C3%ADa%20conversar%20contigo%20sobre%3A%0A%0A" target="_blank" rel="noopener noreferrer">ESCRIBIR POR GMAIL ✉</a>
-          <a class="btn-email-default" href="mailto:ian.bustos213@gmail.com?subject=Contacto%20desde%20mi%20portafolio">ABRIR MI APLICACIÓN DE CORREO</a>
-          <p class="contact-note">Se abrirá un borrador dirigido a Sergio. Revisa y envía el mensaje desde tu correo.</p>
+          <a class="button button-light" href="mailto:ian.bustos213@gmail.com?subject=Contacto%20desde%20tu%20portafolio">ESCRÍBEME <span aria-hidden="true">↗</span></a>
+          <a class="contact-email" href="mailto:ian.bustos213@gmail.com">IAN.BUSTOS213@GMAIL.COM</a>
         </div>
-
-        <div class="email-direct-box">
-          <span class="email-label">CORREO DIRECTO:</span>
-          <a href="mailto:ian.bustos213@gmail.com" id="email-text" class="email-link">ian.bustos213@gmail.com</a>
-          <button id="copy-btn" class="btn-copy" type="button" title="Copiar correo">📋 COPIAR</button>
-        </div>
-        <span id="copy-message" class="copy-message">¡Correo copiado al portapapeles!</span>
+        <a class="linkedin-link" href="https://www.linkedin.com/in/sergio-bustos-859973414/" target="_blank" rel="noopener noreferrer">LINKEDIN <span aria-hidden="true">↗</span></a>
       </div>
+      <span class="contact-stamp" aria-hidden="true">TAKE<br>YOUR<br>HEART</span>
     </section>
-
   </main>
 
-  <footer>
-    <p>© 2026 - Creado por <span>Sergio Bustos</span> durante el programa Skillnest.</p>
+  <footer class="site-footer">
+    <a class="footer-mark" href="#inicio">SERGIO<span>.</span></a>
+    <p>DISEÑADO Y DESARROLLADO POR SERGIO BUSTOS</p>
+    <a href="#inicio" class="back-top">VOLVER ARRIBA ↑</a>
   </footer>
-
-  <script src="assets/js/main.js"></script>
 </body>
 </html>

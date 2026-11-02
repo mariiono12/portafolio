@@ -1,191 +1,115 @@
-document.body.classList.add('js-enabled');
+const menuToggle = document.getElementById('menu-toggle');
+const siteNav = document.getElementById('site-nav');
+const navLinks = document.querySelectorAll('.site-nav a[href^="#"]');
+const curtain = document.getElementById('transition-curtain');
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// Cambiador de Tema
-const themeBtn = document.getElementById('theme-toggle');
-if (themeBtn) {
-  themeBtn.addEventListener('click', () => {
-    const currentTheme = document.body.getAttribute('data-theme');
-    if (currentTheme === 'light') {
-      document.body.removeAttribute('data-theme');
-      themeBtn.textContent = '👁️ MODES';
-    } else {
-      document.body.setAttribute('data-theme', 'light');
-      themeBtn.textContent = '🌟 MODES';
-    }
+function closeMenu() {
+  if (!menuToggle || !siteNav) return;
+
+  menuToggle.setAttribute('aria-expanded', 'false');
+  siteNav.classList.remove('is-open');
+  document.body.classList.remove('menu-open');
+}
+
+if (menuToggle && siteNav) {
+  menuToggle.addEventListener('click', () => {
+    const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+    menuToggle.setAttribute('aria-expanded', String(!isOpen));
+    siteNav.classList.toggle('is-open', !isOpen);
+    document.body.classList.toggle('menu-open', !isOpen);
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') closeMenu();
   });
 }
 
-// TRANSICIÓN DE CORTINA Y NAVEGACIÓN
-const overlay = document.getElementById('p5-transition');
-const wheelItems = document.querySelectorAll('.wheel-item');
-const compactNavigation = window.matchMedia('(max-width: 1100px)');
-
-function updateWheelPositions(selectedItem) {
-  const selectedIndex = Array.from(wheelItems).indexOf(selectedItem);
-  if (selectedIndex < 0) return;
-
-  wheelItems.forEach((item, index) => {
-    if (compactNavigation.matches) {
-      item.style.left = '';
-      item.style.top = '';
-    } else {
-      const angle = ((index - selectedIndex) * 90 * Math.PI) / 180;
-      const x = Math.round(Math.cos(angle) * 80);
-      const y = Math.round(Math.sin(angle) * 80);
-      item.style.left = `calc(50% + ${x}px)`;
-      item.style.top = `calc(50% + ${y}px)`;
-    }
-    item.classList.toggle('active', index === selectedIndex);
-  });
-}
-
-if (wheelItems.length > 0) {
-  updateWheelPositions(document.querySelector('.wheel-item.active') || wheelItems[0]);
-  window.addEventListener('resize', () => {
-    updateWheelPositions(document.querySelector('.wheel-item.active') || wheelItems[0]);
-  });
-}
-
-function triggerP5Transition(targetId, onComplete) {
-  if (!overlay) return;
-
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  overlay.classList.remove('exit');
-  overlay.classList.add('active');
-
-  setTimeout(() => {
-    if (targetId) {
-      const targetSection = document.querySelector(targetId);
-      if (targetSection) {
-        targetSection.scrollIntoView({ behavior: 'auto' });
-      }
-    }
-    if (onComplete) onComplete();
-  }, reducedMotion ? 0 : 400);
-
-  setTimeout(() => {
-    overlay.classList.add('exit');
-    overlay.classList.remove('active');
-  }, reducedMotion ? 0 : 780);
-}
-
-// Interceptar enlaces con hash (#)
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-  link.addEventListener('click', (e) => {
+navLinks.forEach(link => {
+  link.addEventListener('click', event => {
     const targetId = link.getAttribute('href');
-    if (targetId && targetId !== '#') {
-      e.preventDefault();
+    const target = targetId ? document.querySelector(targetId) : null;
 
-      if (link.classList.contains('wheel-item')) updateWheelPositions(link);
+    closeMenu();
+    if (!target || !curtain || reduceMotion) return;
 
-      triggerP5Transition(targetId);
-    }
+    event.preventDefault();
+    curtain.classList.remove('is-active');
+    void curtain.offsetWidth;
+    curtain.classList.add('is-active');
+
+    window.setTimeout(() => {
+      history.pushState(null, '', targetId);
+      target.scrollIntoView({ behavior: 'auto', block: 'start' });
+    }, 255);
+
+    window.setTimeout(() => curtain.classList.remove('is-active'), 700);
   });
 });
 
-// Sincronización de la Rueda al hacer Scroll Manual
-const sections = document.querySelectorAll('section');
+const sections = document.querySelectorAll('main section[id]');
+if ('IntersectionObserver' in window) {
+  const sectionObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
 
-window.addEventListener('scroll', () => {
-  let currentSection = '';
-  sections.forEach(section => {
-    const sectionTop = section.offsetTop - 200;
-    if (window.scrollY >= sectionTop) {
-      currentSection = section.getAttribute('id');
-    }
-  });
+      document.querySelectorAll('.site-nav .nav-link').forEach(link => {
+        link.classList.toggle('is-active', link.hash === `#${entry.target.id}`);
+      });
+    });
+  }, { rootMargin: '-30% 0px -55% 0px' });
 
-  if (wheelItems.length > 0) {
-    const activeItem = Array.from(wheelItems).find(item => item.getAttribute('href') === `#${currentSection}`);
-    if (activeItem) updateWheelPositions(activeItem);
+  sections.forEach(section => sectionObserver.observe(section));
+
+  if (!reduceMotion) {
+    document.body.classList.add('js-enabled');
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.section-block, .project-card').forEach(element => {
+      element.classList.add('reveal');
+      revealObserver.observe(element);
+    });
   }
-});
-
-// COPIAR CORREO AL PORTAPAPELES
-const copyBtn = document.getElementById('copy-btn');
-const emailTextElement = document.getElementById('email-text');
-const copyMessage = document.getElementById('copy-message');
-
-if (copyBtn && emailTextElement) {
-  copyBtn.addEventListener('click', async () => {
-    const email = emailTextElement.textContent.trim();
-    try {
-      if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(email);
-      } else {
-        const temporaryInput = document.createElement('textarea');
-        temporaryInput.value = email;
-        temporaryInput.setAttribute('readonly', '');
-        temporaryInput.style.position = 'absolute';
-        temporaryInput.style.left = '-9999px';
-        document.body.appendChild(temporaryInput);
-        temporaryInput.select();
-        const copied = document.execCommand('copy');
-        temporaryInput.remove();
-        if (!copied) throw new Error('No se pudo copiar el correo.');
-      }
-
-      if (copyMessage) {
-        copyMessage.textContent = '¡Correo copiado al portapapeles!';
-        copyMessage.classList.add('show');
-      }
-    } catch (error) {
-      if (copyMessage) {
-        copyMessage.textContent = 'No se pudo copiar. Selecciona el correo y cópialo manualmente.';
-        copyMessage.classList.add('show');
-      }
-      console.error('Error al copiar el correo de contacto:', error);
-    }
-
-    if (copyMessage) {
-      setTimeout(() => copyMessage.classList.remove('show'), 2500);
-    }
-  });
 }
 
-// MÁQUINA DE ESCRIBIR
-const phrases = [
-  "Desarrollador Web Full Stack",
-  "Especializado en Python & Flask",
-  "Estudiante del Programa Skillnest"
+const typewriter = document.getElementById('typewriter-text');
+const roles = [
+  'Desarrollador Web Full Stack',
+  'Python · Flask · MySQL',
+  'Estudiante en Skillnest'
 ];
 
-let pIndex = 0;
-let cIndex = 0;
-const target = document.getElementById('typewriter-text');
+if (typewriter && !reduceMotion) {
+  let roleIndex = 0;
+  let characterIndex = roles[0].length;
+  let deleting = false;
 
-function type() {
-  if (target && cIndex < phrases[pIndex].length) {
-    target.textContent += phrases[pIndex].charAt(cIndex);
-    cIndex++;
-    setTimeout(type, 60);
-  } else if (target) {
-    setTimeout(erase, 1800);
-  }
-}
+  function animateRole() {
+    const role = roles[roleIndex];
+    typewriter.textContent = role.slice(0, characterIndex);
 
-function erase() {
-  if (target && cIndex > 0) {
-    target.textContent = phrases[pIndex].substring(0, cIndex - 1);
-    cIndex--;
-    setTimeout(erase, 30);
-  } else if (target) {
-    pIndex = (pIndex + 1) % phrases.length;
-    setTimeout(type, 400);
-  }
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  if (target) type();
-});
-
-// REVELAR SECCIONES AL HACER SCROLL
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
+    if (!deleting && characterIndex === role.length) {
+      deleting = true;
+      window.setTimeout(animateRole, 1700);
+      return;
     }
-  });
-}, { threshold: 0.1 });
 
-document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    if (deleting && characterIndex === 0) {
+      deleting = false;
+      roleIndex = (roleIndex + 1) % roles.length;
+      window.setTimeout(animateRole, 320);
+      return;
+    }
+
+    characterIndex += deleting ? -1 : 1;
+    window.setTimeout(animateRole, deleting ? 32 : 58);
+  }
+
+  window.setTimeout(animateRole, 1800);
+}
