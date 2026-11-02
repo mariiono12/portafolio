@@ -85,10 +85,10 @@ if ('IntersectionObserver' in window) {
       });
     }, { threshold: 0.12 });
 
-    document.querySelectorAll('.section-block, .project-card, .principle-card, .skill-group').forEach(element => {
-      if (element.matches('.project-card, .principle-card, .skill-group')) {
+    document.querySelectorAll('.section-block, .project-card, .principle-card, .skill-group, .skill-card').forEach(element => {
+      if (element.matches('.project-card, .principle-card, .skill-group, .skill-card')) {
         const siblings = Array.from(element.parentElement.children)
-          .filter(sibling => sibling.matches('.project-card, .principle-card, .skill-group'));
+          .filter(sibling => sibling.matches('.project-card, .principle-card, .skill-group, .skill-card'));
         element.style.setProperty('--reveal-delay', `${siblings.indexOf(element) * 90}ms`);
       }
 

@@ -230,9 +230,8 @@ button:focus-visible {
   position: relative;
   display: grid;
   min-height: min(760px, calc(100svh - 76px));
-  grid-template-columns: 1.12fr 0.88fr;
+  grid-template-columns: minmax(0, 1fr);
   align-items: center;
-  gap: clamp(28px, 6vw, 90px);
   padding-top: 88px;
   padding-bottom: 120px;
 }
@@ -253,6 +252,7 @@ button:focus-visible {
 .hero-copy {
   position: relative;
   z-index: 2;
+  max-width: 860px;
 }
 
 .eyebrow {
@@ -438,85 +438,6 @@ button:focus-visible {
   font-size: 11px;
   font-weight: 400;
   letter-spacing: 1.4px;
-}
-
-.hero-art {
-  position: relative;
-  width: min(100%, 410px);
-  justify-self: center;
-  padding: 20px 26px 35px 0;
-}
-
-.hero-art-shape {
-  position: absolute;
-  top: 7%;
-  right: 0;
-  bottom: 3%;
-  left: 12%;
-  transform: skewY(-8deg) rotate(4deg);
-  background: var(--red);
-}
-
-.hero-photo-frame {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  overflow: hidden;
-  transform: rotate(-3deg);
-  border: 7px solid var(--paper);
-  background: #292725;
-  box-shadow: 15px 16px 0 rgba(0, 0, 0, 0.55);
-}
-
-.hero-photo-frame img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 0.84;
-  object-fit: cover;
-  filter: contrast(1.05) saturate(0.82);
-}
-
-.photo-caption {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 8px 12px;
-  background: rgba(17, 17, 17, 0.87);
-  color: #fff;
-  font-family: var(--display);
-  font-size: 11px;
-  letter-spacing: 1.5px;
-}
-
-.hero-sticker {
-  position: absolute;
-  z-index: 2;
-  right: -9px;
-  bottom: 57px;
-  display: grid;
-  width: 92px;
-  height: 92px;
-  place-content: center;
-  transform: rotate(9deg);
-  border: 2px solid #fff;
-  border-radius: 50%;
-  background: var(--black);
-  color: #fff;
-  font-family: var(--display);
-  font-size: 17px;
-  line-height: 0.98;
-  text-align: center;
-}
-
-.hero-index {
-  position: absolute;
-  top: 0;
-  right: 3px;
-  color: #d1cbc4;
-  font-family: var(--display);
-  font-size: 13px;
-  letter-spacing: 2px;
 }
 
 .scroll-cue {
@@ -930,19 +851,21 @@ button:focus-visible {
 }
 
 .skill-groups {
-  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 29px;
 }
 
 .skill-group {
-  padding: 19px 0 23px;
-  border-bottom: 1px solid var(--line);
+  min-width: 0;
 }
 
 .skill-group h3 {
   display: flex;
   align-items: center;
   gap: 13px;
-  margin: 0 0 14px;
+  margin: 0 0 12px;
+  padding-bottom: 11px;
+  border-bottom: 1px solid var(--line);
   color: var(--white);
   font-family: var(--display);
   font-size: 15px;
@@ -955,24 +878,47 @@ button:focus-visible {
   font-size: 11px;
 }
 
-.skill-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
 }
 
-.skill-chips span {
-  padding: 7px 12px;
-  border: 1px solid #48433e;
-  color: #d2cec8;
-  font-size: 11px;
-  transition: border-color 180ms ease, background 180ms ease, color 180ms ease;
+.skill-card {
+  min-height: 136px;
+  padding: 15px;
+  border: 1px solid #363330;
+  border-left: 2px solid var(--red);
+  background: #171615;
+  transition: border-color 180ms ease, background 180ms ease;
 }
 
-.skill-chips span:hover {
+.skill-card:hover {
   border-color: var(--red);
-  background: var(--red);
-  color: #fff;
+  background: #201d1b;
+}
+
+.skill-card > span {
+  color: var(--red);
+  font-family: var(--display);
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+.skill-card h4 {
+  margin: 8px 0 5px;
+  color: var(--white);
+  font-family: var(--display);
+  font-size: 19px;
+  font-weight: 400;
+  letter-spacing: 0.4px;
+}
+
+.skill-card p {
+  margin: 0;
+  color: #aaa59e;
+  font-size: 11px;
+  line-height: 1.55;
 }
 
 .skills-note {
@@ -1161,10 +1107,6 @@ button:focus-visible {
 .js-enabled .hero-copy > :nth-child(6) { animation-delay: 460ms; }
 .js-enabled .hero-copy > :nth-child(7) { animation-delay: 540ms; }
 
-.js-enabled .hero-art {
-  animation: hero-art-enter 850ms 220ms both cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-
 @keyframes hero-copy-enter {
   from {
     opacity: 0;
@@ -1173,17 +1115,6 @@ button:focus-visible {
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@keyframes hero-art-enter {
-  from {
-    opacity: 0;
-    transform: translate(22px, 8px) rotate(2deg);
-  }
-  to {
-    opacity: 1;
-    transform: translate(0, 0) rotate(0);
   }
 }
 
@@ -1269,20 +1200,8 @@ button:focus-visible {
 }
 
 @media (max-width: 900px) {
-  .hero {
-    min-height: auto;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 30px;
-    padding-top: 76px;
-    padding-bottom: 110px;
-  }
-
   .hero-title {
     font-size: clamp(64px, 10vw, 94px);
-  }
-
-  .hero-art {
-    width: min(100%, 340px);
   }
 
   .about-content,
@@ -1315,8 +1234,6 @@ button:focus-visible {
   }
 
   .hero {
-    grid-template-columns: 1fr;
-    gap: 45px;
     padding-top: 59px;
     padding-bottom: 90px;
   }
@@ -1339,12 +1256,6 @@ button:focus-visible {
   .hero-description {
     max-width: 560px;
     font-size: 14px;
-  }
-
-  .hero-art {
-    width: min(76%, 340px);
-    justify-self: center;
-    margin-right: 13px;
   }
 
   .scroll-cue {
@@ -1411,6 +1322,10 @@ button:focus-visible {
 
   .skills-layout {
     gap: 30px;
+  }
+
+  .skill-grid {
+    grid-template-columns: 1fr;
   }
 
   .skills-intro {
