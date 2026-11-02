@@ -1,37 +1,33 @@
-document.body.classList.add('js-enabled');
-
-// Cambiador de Tema
 const themeBtn = document.getElementById('theme-toggle');
 if (themeBtn) {
   themeBtn.addEventListener('click', () => {
-    const currentTheme = document.body.getAttribute('data-theme');
-    if (currentTheme === 'light') {
+    const isLight = document.body.getAttribute('data-theme') === 'light';
+    if (isLight) {
       document.body.removeAttribute('data-theme');
-      themeBtn.textContent = '👁️ MODES';
     } else {
       document.body.setAttribute('data-theme', 'light');
-      themeBtn.textContent = '🌟 MODES';
     }
+
+    themeBtn.setAttribute('aria-pressed', String(!isLight));
+    themeBtn.setAttribute('aria-label', isLight ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro');
+    themeBtn.textContent = isLight ? '☼' : '☾';
   });
 }
 
-// TRANSICIÓN DE CORTINA Y NAVEGACIÓN
 const overlay = document.getElementById('p5-transition');
 
-function triggerP5Transition(targetId, onComplete) {
+function triggerP5Transition(targetId) {
   if (!overlay) return;
 
   overlay.classList.remove('exit');
   overlay.classList.add('active');
 
   setTimeout(() => {
-    if (targetId) {
-      const targetSection = document.querySelector(targetId);
-      if (targetSection) {
-        targetSection.scrollIntoView({ behavior: 'auto' });
-      }
+    const targetSection = document.querySelector(targetId);
+    if (targetSection) {
+      history.pushState(null, '', targetId);
+      targetSection.scrollIntoView({ behavior: 'auto' });
     }
-    if (onComplete) onComplete();
   }, 320);
 
   setTimeout(() => {
@@ -40,146 +36,117 @@ function triggerP5Transition(targetId, onComplete) {
   }, 650);
 }
 
-// Interceptar enlaces con hash (#)
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-  link.addEventListener('click', (e) => {
+document.querySelectorAll('.primary-nav a[href^="#"], .hero-actions a[href^="#"], footer a[href^="#"]').forEach(link => {
+  link.addEventListener('click', event => {
     const targetId = link.getAttribute('href');
-    if (targetId && targetId !== '#') {
-      e.preventDefault();
+    if (!targetId || targetId === '#' || !overlay || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!document.querySelector(targetId)) return;
 
-      const wheel = document.getElementById('p5-wheel');
-      const angle = link.getAttribute('data-angle');
-      if (wheel && angle !== null) {
-        wheel.style.transform = `rotate(${angle}deg)`;
-        document.querySelectorAll('.wheel-item').forEach(i => i.classList.remove('active'));
-        link.classList.add('active');
-      }
-
-      triggerP5Transition(targetId);
-    }
+    event.preventDefault();
+    triggerP5Transition(targetId);
   });
 });
 
-// Sincronización de la Rueda al hacer Scroll Manual
-const sections = document.querySelectorAll('section');
-const wheelItems = document.querySelectorAll('.wheel-item');
-const wheel = document.getElementById('p5-wheel');
-
-window.addEventListener('scroll', () => {
-  let currentSection = '';
-  sections.forEach(section => {
-    const sectionTop = section.offsetTop - 200;
-    if (window.scrollY >= sectionTop) {
-      currentSection = section.getAttribute('id');
-    }
-  });
-
-  if (wheelItems.length > 0 && wheel) {
-    wheelItems.forEach(item => {
-      const targetId = item.getAttribute('href');
-      if (targetId === `#${currentSection}`) {
-        item.classList.add('active');
-        const angle = item.getAttribute('data-angle');
-        if (angle !== null) {
-          wheel.style.transform = `rotate(${angle}deg)`;
-        }
-      } else {
-        item.classList.remove('active');
-      }
-    });
-  }
-});
-
-// PROCESAMIENTO DEL FORMULARIO DE CONTACTO (EVENTO SUBMIT DIRECTO)
 const contactForm = document.getElementById('contact-form');
 const successAlert = document.getElementById('form-success-alert');
+const contactEmail = document.getElementById('email-text');
 
-if (contactForm) {
-  contactForm.addEventListener('submit', function(e) {
-    // 1. Detener navegación y recarga por completo
-    e.preventDefault();
-    e.stopPropagation();
+if (contactForm && contactEmail) {
+  contactForm.addEventListener('submit', event => {
+    event.preventDefault();
 
-    // 2. Mostrar la alerta de confirmación
+    const name = document.getElementById('name').value.trim();
+    const senderEmail = document.getElementById('email').value.trim();
+    const subject = document.getElementById('subject').value.trim();
+    const message = document.getElementById('message').value.trim();
+    const body = `Hola, soy ${name} (${senderEmail}).\n\n${message}`;
+    const mailto = `mailto:${contactEmail.textContent.trim()}?${new URLSearchParams({
+      subject,
+      body
+    })}`;
+
     if (successAlert) {
+      successAlert.textContent = 'Se abrirá tu aplicación de correo con el mensaje listo para enviar.';
       successAlert.classList.add('show');
     }
 
-    // 3. Limpiar todos los campos
-    contactForm.reset();
-
-    // 4. Ocultar la alerta pasados 4 segundos
-    setTimeout(() => {
-      if (successAlert) {
-        successAlert.classList.remove('show');
-      }
-    }, 4000);
-
-    return false;
+    window.location.href = mailto;
   });
 }
 
-// COPIAR CORREO AL PORTAPAPELES
 const copyBtn = document.getElementById('copy-btn');
-const emailTextElement = document.getElementById('email-text');
 const copyMessage = document.getElementById('copy-message');
 
-if (copyBtn && emailTextElement) {
-  copyBtn.addEventListener('click', () => {
-    navigator.clipboard.writeText(emailTextElement.textContent).then(() => {
-      if (copyMessage) {
-        copyMessage.classList.add('show');
-        setTimeout(() => {
-          copyMessage.classList.remove('show');
-        }, 2500);
-      }
-    });
+if (copyBtn && contactEmail && copyMessage) {
+  copyBtn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(contactEmail.textContent.trim());
+      copyMessage.textContent = '¡Correo copiado al portapapeles!';
+    } catch {
+      copyMessage.textContent = 'No se pudo copiar. Puedes seleccionar el correo y copiarlo manualmente.';
+    }
+
+    copyMessage.classList.add('show');
+    setTimeout(() => copyMessage.classList.remove('show'), 3000);
   });
 }
 
-// MÁQUINA DE ESCRIBIR
-const phrases = [
-  "Desarrollador Web Full Stack",
-  "Especializado en Python & Flask",
-  "Estudiante del Programa Skillnest"
-];
+const year = document.getElementById('current-year');
+if (year) {
+  year.textContent = String(new Date().getFullYear());
+}
 
-let pIndex = 0;
-let cIndex = 0;
-const target = document.getElementById('typewriter-text');
+const phrases = [
+  'Desarrollador Web Full Stack',
+  'Python · Flask · MySQL',
+  'Estudiante del programa Skillnest'
+];
+const typewriter = document.getElementById('typewriter-text');
+let phraseIndex = 0;
+let characterIndex = 0;
 
 function type() {
-  if (target && cIndex < phrases[pIndex].length) {
-    target.textContent += phrases[pIndex].charAt(cIndex);
-    cIndex++;
-    setTimeout(type, 60);
-  } else if (target) {
+  if (!typewriter) return;
+
+  if (characterIndex < phrases[phraseIndex].length) {
+    typewriter.textContent += phrases[phraseIndex].charAt(characterIndex);
+    characterIndex += 1;
+    setTimeout(type, 55);
+  } else {
     setTimeout(erase, 1800);
   }
 }
 
 function erase() {
-  if (target && cIndex > 0) {
-    target.textContent = phrases[pIndex].substring(0, cIndex - 1);
-    cIndex--;
-    setTimeout(erase, 30);
-  } else if (target) {
-    pIndex = (pIndex + 1) % phrases.length;
-    setTimeout(type, 400);
+  if (!typewriter) return;
+
+  if (characterIndex > 0) {
+    typewriter.textContent = phrases[phraseIndex].substring(0, characterIndex - 1);
+    characterIndex -= 1;
+    setTimeout(erase, 25);
+  } else {
+    phraseIndex = (phraseIndex + 1) % phrases.length;
+    setTimeout(type, 350);
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  if (target) type();
-});
+if (typewriter && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  type();
+} else if (typewriter) {
+  typewriter.textContent = phrases[0];
+}
 
-// REVELAR SECCIONES AL HACER SCROLL
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.1 });
+const animatedSections = document.querySelectorAll('.fade-in');
+if ('IntersectionObserver' in window) {
+  document.body.classList.add('js-enabled');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
 
-document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  animatedSections.forEach(section => observer.observe(section));
+}
