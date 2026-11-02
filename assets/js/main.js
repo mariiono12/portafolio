@@ -15,39 +15,10 @@ if (themeBtn) {
 }
 
 const overlay = document.getElementById('p5-transition');
-const wheelItems = document.querySelectorAll('.wheel-item');
-const compactNavigation = window.matchMedia('(max-width: 1100px)');
-
-function updateWheelPositions(selectedItem) {
-  const selectedIndex = Array.from(wheelItems).indexOf(selectedItem);
-  if (selectedIndex < 0) return;
-
-  wheelItems.forEach((item, index) => {
-    if (compactNavigation.matches) {
-      item.style.left = '';
-      item.style.top = '';
-    } else {
-      const angle = ((index - selectedIndex) * 90 * Math.PI) / 180;
-      const x = Math.round(Math.cos(angle) * 80);
-      const y = Math.round(Math.sin(angle) * 80);
-      item.style.left = `calc(50% + ${x}px)`;
-      item.style.top = `calc(50% + ${y}px)`;
-    }
-    item.classList.toggle('active', index === selectedIndex);
-  });
-}
-
-if (wheelItems.length > 0) {
-  updateWheelPositions(document.querySelector('.wheel-item.active') || wheelItems[0]);
-  window.addEventListener('resize', () => {
-    updateWheelPositions(document.querySelector('.wheel-item.active') || wheelItems[0]);
-  });
-}
 
 function triggerP5Transition(targetId) {
   if (!overlay) return;
 
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   overlay.classList.remove('exit');
   overlay.classList.add('active');
 
@@ -57,17 +28,12 @@ function triggerP5Transition(targetId) {
       history.pushState(null, '', targetId);
       targetSection.scrollIntoView({ behavior: 'auto' });
     }
-<<<<<<< HEAD:portafolio-sergio-bustos/assets/js/main.js
   }, 320);
-=======
-    if (onComplete) onComplete();
-  }, reducedMotion ? 0 : 400);
->>>>>>> 968515cdd759b5517f8faf12247a2b69b8ceb3b4:assets/js/main.js
 
   setTimeout(() => {
     overlay.classList.add('exit');
     overlay.classList.remove('active');
-  }, reducedMotion ? 0 : 780);
+  }, 650);
 }
 
 document.querySelectorAll('.primary-nav a[href^="#"], .hero-actions a[href^="#"], footer a[href^="#"]').forEach(link => {
@@ -76,7 +42,6 @@ document.querySelectorAll('.primary-nav a[href^="#"], .hero-actions a[href^="#"]
     if (!targetId || targetId === '#' || !overlay || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     if (!document.querySelector(targetId)) return;
 
-<<<<<<< HEAD:portafolio-sergio-bustos/assets/js/main.js
     event.preventDefault();
     triggerP5Transition(targetId);
   });
@@ -109,38 +74,9 @@ if (contactForm && contactEmail) {
   });
 }
 
-=======
-      if (link.classList.contains('wheel-item')) updateWheelPositions(link);
-
-      triggerP5Transition(targetId);
-    }
-  });
-});
-
-// Sincronización de la Rueda al hacer Scroll Manual
-const sections = document.querySelectorAll('section');
-
-window.addEventListener('scroll', () => {
-  let currentSection = '';
-  sections.forEach(section => {
-    const sectionTop = section.offsetTop - 200;
-    if (window.scrollY >= sectionTop) {
-      currentSection = section.getAttribute('id');
-    }
-  });
-
-  if (wheelItems.length > 0) {
-    const activeItem = Array.from(wheelItems).find(item => item.getAttribute('href') === `#${currentSection}`);
-    if (activeItem) updateWheelPositions(activeItem);
-  }
-});
-
-// COPIAR CORREO AL PORTAPAPELES
->>>>>>> 968515cdd759b5517f8faf12247a2b69b8ceb3b4:assets/js/main.js
 const copyBtn = document.getElementById('copy-btn');
 const copyMessage = document.getElementById('copy-message');
 
-<<<<<<< HEAD:portafolio-sergio-bustos/assets/js/main.js
 if (copyBtn && contactEmail && copyMessage) {
   copyBtn.addEventListener('click', async () => {
     try {
@@ -152,42 +88,6 @@ if (copyBtn && contactEmail && copyMessage) {
 
     copyMessage.classList.add('show');
     setTimeout(() => copyMessage.classList.remove('show'), 3000);
-=======
-if (copyBtn && emailTextElement) {
-  copyBtn.addEventListener('click', async () => {
-    const email = emailTextElement.textContent.trim();
-    try {
-      if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(email);
-      } else {
-        const temporaryInput = document.createElement('textarea');
-        temporaryInput.value = email;
-        temporaryInput.setAttribute('readonly', '');
-        temporaryInput.style.position = 'absolute';
-        temporaryInput.style.left = '-9999px';
-        document.body.appendChild(temporaryInput);
-        temporaryInput.select();
-        const copied = document.execCommand('copy');
-        temporaryInput.remove();
-        if (!copied) throw new Error('No se pudo copiar el correo.');
-      }
-
-      if (copyMessage) {
-        copyMessage.textContent = '¡Correo copiado al portapapeles!';
-        copyMessage.classList.add('show');
-      }
-    } catch (error) {
-      if (copyMessage) {
-        copyMessage.textContent = 'No se pudo copiar. Selecciona el correo y cópialo manualmente.';
-        copyMessage.classList.add('show');
-      }
-      console.error('Error al copiar el correo de contacto:', error);
-    }
-
-    if (copyMessage) {
-      setTimeout(() => copyMessage.classList.remove('show'), 2500);
-    }
->>>>>>> 968515cdd759b5517f8faf12247a2b69b8ceb3b4:assets/js/main.js
   });
 }
 
