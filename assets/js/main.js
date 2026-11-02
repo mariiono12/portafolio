@@ -1,8 +1,34 @@
 const menuToggle = document.getElementById('menu-toggle');
 const siteNav = document.getElementById('site-nav');
-const navLinks = document.querySelectorAll('.site-nav a[href^="#"]');
+const commandWheelLinks = document.querySelectorAll('.command-wheel-link[href^="#"]');
 const curtain = document.getElementById('transition-curtain');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function updateCommandWheel(selectedLink) {
+  const selectedIndex = Array.from(commandWheelLinks).indexOf(selectedLink);
+  if (selectedIndex < 0) return;
+
+  commandWheelLinks.forEach((link, index) => {
+    const angle = ((index - selectedIndex) * 90 * Math.PI) / 180;
+    const radius = 57;
+    const x = Math.round(Math.cos(angle) * radius);
+    const y = Math.round(Math.sin(angle) * radius);
+
+    link.style.left = `calc(50% + ${x}px)`;
+    link.style.top = `calc(50% + ${y}px)`;
+    link.classList.toggle('is-active', index === selectedIndex);
+
+    if (index === selectedIndex) {
+      link.setAttribute('aria-current', 'location');
+    } else {
+      link.removeAttribute('aria-current');
+    }
+  });
+}
+
+if (commandWheelLinks.length > 0) {
+  updateCommandWheel(commandWheelLinks[0]);
+}
 
 function closeMenu() {
   if (!menuToggle || !siteNav) return;
@@ -25,12 +51,16 @@ if (menuToggle && siteNav) {
   });
 }
 
-navLinks.forEach(link => {
+document.querySelectorAll('.site-nav a[href^="#"], .command-wheel-link[href^="#"]').forEach(link => {
   link.addEventListener('click', event => {
     const targetId = link.getAttribute('href');
     const target = targetId ? document.querySelector(targetId) : null;
 
     closeMenu();
+    if (link.classList.contains('command-wheel-link')) {
+      updateCommandWheel(link);
+    }
+
     if (!target || !curtain || reduceMotion) return;
 
     event.preventDefault();
@@ -56,6 +86,10 @@ if ('IntersectionObserver' in window) {
       document.querySelectorAll('.site-nav .nav-link').forEach(link => {
         link.classList.toggle('is-active', link.hash === `#${entry.target.id}`);
       });
+
+      const activeSectionHash = entry.target.id === 'inicio' ? '#sobre-mi' : `#${entry.target.id}`;
+      const activeWheelLink = Array.from(commandWheelLinks).find(link => link.hash === activeSectionHash);
+      if (activeWheelLink) updateCommandWheel(activeWheelLink);
     });
   }, { rootMargin: '-30% 0px -55% 0px' });
 
@@ -67,11 +101,19 @@ if ('IntersectionObserver' in window) {
       entries.forEach(entry => {
         if (!entry.isIntersecting) return;
         entry.target.classList.add('is-visible');
+        const delay = parseInt(entry.target.style.getPropertyValue('--reveal-delay'), 10) || 0;
+        window.setTimeout(() => entry.target.style.removeProperty('--reveal-delay'), delay + 650);
         revealObserver.unobserve(entry.target);
       });
     }, { threshold: 0.12 });
 
-    document.querySelectorAll('.section-block, .project-card').forEach(element => {
+    document.querySelectorAll('.section-block, .project-card, .principle-card, .skill-group').forEach(element => {
+      if (element.matches('.project-card, .principle-card, .skill-group')) {
+        const siblings = Array.from(element.parentElement.children)
+          .filter(sibling => sibling.matches('.project-card, .principle-card, .skill-group'));
+        element.style.setProperty('--reveal-delay', `${siblings.indexOf(element) * 90}ms`);
+      }
+
       element.classList.add('reveal');
       revealObserver.observe(element);
     });

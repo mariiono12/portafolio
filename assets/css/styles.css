@@ -175,6 +175,117 @@ button:focus-visible {
   display: none;
 }
 
+.command-wheel {
+  position: fixed;
+  z-index: 40;
+  top: 91px;
+  right: 24px;
+  width: 184px;
+  height: 184px;
+  pointer-events: none;
+}
+
+.command-wheel-orbit {
+  position: absolute;
+  inset: 5px;
+  border: 1px solid rgba(242, 12, 35, 0.32);
+  border-radius: 50%;
+}
+
+.command-wheel-orbit::before,
+.command-wheel-orbit::after {
+  position: absolute;
+  border-radius: inherit;
+  content: "";
+}
+
+.command-wheel-orbit::before {
+  inset: 3px;
+  background: repeating-conic-gradient(
+    from 0deg,
+    rgba(242, 12, 35, 0.95) 0deg 2deg,
+    transparent 2deg 18deg
+  );
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));
+  animation: command-wheel-spin 26s linear infinite;
+}
+
+.command-wheel-orbit::after {
+  inset: 14px;
+  transform: rotate(-18deg);
+  border: 1px dashed rgba(255, 253, 248, 0.18);
+  animation: command-wheel-spin 42s linear infinite reverse;
+}
+
+@keyframes command-wheel-spin {
+  to { transform: rotate(360deg); }
+}
+
+.command-wheel-center {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  width: 56px;
+  height: 56px;
+  place-items: center;
+  transform: translate(-50%, -50%);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: var(--red);
+  box-shadow: 0 0 0 5px rgba(242, 12, 35, 0.15), 0 4px 15px #000;
+  color: #fff;
+  font-family: var(--display);
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+.command-wheel-link {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  display: inline-flex;
+  width: 118px;
+  min-height: 34px;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  transform: translate(-50%, -50%) skewX(-5deg);
+  border: 1px solid rgba(242, 12, 35, 0.86);
+  background: #111;
+  box-shadow: 3px 4px 0 rgba(0, 0, 0, 0.7);
+  color: #f5f2eb;
+  font-family: var(--display);
+  font-size: 11px;
+  letter-spacing: 0.65px;
+  text-decoration: none;
+  pointer-events: auto;
+  transition: left 520ms cubic-bezier(0.2, 0.8, 0.2, 1), top 520ms cubic-bezier(0.2, 0.8, 0.2, 1), background 160ms ease, box-shadow 160ms ease, color 160ms ease;
+}
+
+.command-wheel-link span {
+  color: var(--red);
+  font-family: var(--body);
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.command-wheel-link:hover,
+.command-wheel-link.is-active {
+  border-color: #fff;
+  background: var(--red);
+  box-shadow: 4px 5px 0 #000;
+  color: #fff;
+}
+
+.command-wheel-link:hover span,
+.command-wheel-link.is-active span {
+  color: #fff;
+}
+
 .section-wrap {
   width: min(var(--page-width), calc(100% - 64px));
   margin-inline: auto;
@@ -1095,11 +1206,50 @@ button:focus-visible {
   opacity: 0;
   transform: translateY(22px);
   transition: opacity 550ms ease, transform 550ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0ms);
 }
 
 .js-enabled .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+.js-enabled .hero-copy > * {
+  animation: hero-copy-enter 650ms both cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.js-enabled .hero-copy > :nth-child(1) { animation-delay: 80ms; }
+.js-enabled .hero-copy > :nth-child(2) { animation-delay: 150ms; }
+.js-enabled .hero-copy > :nth-child(3) { animation-delay: 220ms; }
+.js-enabled .hero-copy > :nth-child(4) { animation-delay: 300ms; }
+.js-enabled .hero-copy > :nth-child(5) { animation-delay: 380ms; }
+.js-enabled .hero-copy > :nth-child(6) { animation-delay: 460ms; }
+.js-enabled .hero-copy > :nth-child(7) { animation-delay: 540ms; }
+
+.js-enabled .hero-art {
+  animation: hero-art-enter 850ms 220ms both cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@keyframes hero-copy-enter {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-art-enter {
+  from {
+    opacity: 0;
+    transform: translate(22px, 8px) rotate(2deg);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0);
+  }
 }
 
 .transition-curtain {
@@ -1129,6 +1279,12 @@ button:focus-visible {
   0% { transform: translateY(105%); }
   42%, 58% { transform: translateY(0); }
   100% { transform: translateY(-105%); }
+}
+
+@media (max-width: 1100px) {
+  .command-wheel {
+    display: none;
+  }
 }
 
 @media (max-width: 900px) {
