@@ -4,18 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sergio Bustos | Portafolio Desarrollador Web</title>
-  <meta name="description" content="Portafolio de Sergio Bustos: proyectos web con Python, Flask, MySQL y tecnologías frontend.">
-  <meta name="theme-color" content="#0d0d0d">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Impact&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-
-  <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
   <!-- Transición de pantalla estilo Persona 5 -->
   <div id="p5-transition" class="p5-transition-overlay">
@@ -26,20 +22,34 @@
 
   <!-- Header Superior -->
   <header class="header">
-    <a class="logo" href="#sobre-mi" aria-label="Sergio Bustos, inicio">
-      <span class="star" aria-hidden="true">★</span> SERGIO BUSTOS
-    </a>
-    <nav class="primary-nav" aria-label="Navegación principal">
-      <a href="#sobre-mi">Inicio</a>
-      <a href="#enfoque">Enfoque</a>
-      <a href="#proyectos">Proyectos</a>
-      <a href="#tecnologias">Tecnologías</a>
-      <a href="#contacto">Contacto</a>
-    </nav>
-    <button id="theme-toggle" class="btn-theme" type="button" aria-label="Cambiar a tema claro" aria-pressed="false">☼</button>
+    <div class="logo">
+      <span class="star">★</span> SERGIO BUSTOS <span class="logo-sub">| DESARROLLADOR FULLSTACK Jr.</span>
+    </div>
   </header>
 
-  <main id="contenido" class="main-container">
+  <!-- RUEDA RADIAL DE COMANDOS -->
+  <div class="p5-wheel-container">
+    <div class="wheel-center-badge">
+      <span>MENU</span>
+    </div>
+
+    <div class="p5-wheel" id="p5-wheel">
+      <a href="#sobre-mi" class="wheel-item item-1 p5-nav-link active" data-angle="0">
+        <span class="cmd-box">👤 SOBRE MÍ</span>
+      </a>
+      <a href="#proyectos" class="wheel-item item-2 p5-nav-link" data-angle="-90">
+        <span class="cmd-box">📂 PROYECTOS</span>
+      </a>
+      <a href="#tecnologias" class="wheel-item item-3 p5-nav-link" data-angle="-180">
+        <span class="cmd-box">⚡ TECNOLOGIA</span>
+      </a>
+      <a href="#contacto" class="wheel-item item-4 p5-nav-link" data-angle="-270">
+        <span class="cmd-box">📧 CONTACTO</span>
+      </a>
+    </div>
+  </div>
+
+  <main class="main-container">
 
     <!-- 1. Presentación Personal -->
     <section id="sobre-mi" class="hero fade-in p5-panel pos-left">
@@ -47,70 +57,37 @@
         <span class="pulse-dot"></span> ESTADO :: DISPONIBLE PARA TRABAJAR
       </div>
 
-      <div class="hero-layout">
-        <img class="profile-photo" src="assets/images/me.jpg" alt="Retrato de Sergio Bustos" width="240" height="240">
-        <div class="hero-copy">
-          <p class="eyebrow">PORTAFOLIO · DESARROLLO WEB</p>
-          <h1 class="p5-title">
-            <span class="box-black">HOLA,</span>
-            <span class="box-red">SOY</span>
-            <span class="box-white">SERGIO BUSTOS</span>
-          </h1>
-          <div class="typewriter-container" aria-label="Desarrollador Web Full Stack">
-            <span id="typewriter-text"></span><span class="cursor" aria-hidden="true">█</span>
-          </div>
-          <p class="bio">
-            Desarrollador web en formación en el programa <strong>Skillnest</strong>. Me interesa crear aplicaciones funcionales combinando lógica backend con <strong>Python y Flask</strong>, bases de datos relacionales en <strong>MySQL</strong> e interfaces web claras e interactivas.
-          </p>
-          <div class="hero-actions">
-            <a href="#proyectos" class="btn p5-btn-red">VER PROYECTOS <span aria-hidden="true">↓</span></a>
-            <a href="mailto:ian.bustos213@gmail.com" class="btn p5-btn-black">HABLEMOS <span aria-hidden="true">↗</span></a>
-            <a href="https://github.com/mariiono12" target="_blank" rel="noopener noreferrer" class="btn p5-btn-outline">GITHUB <span aria-hidden="true">↗</span></a>
-          </div>
-          <div class="hero-meta" aria-label="Perfil profesional">
-            <span><strong>FORMACIÓN</strong> Full Stack Python · Skillnest</span>
-            <span><strong>ENFOQUE</strong> Backend · Datos · Web</span>
-          </div>
-        </div>
+      <h1 class="p5-title">
+        <span class="box-black">HOLA,</span>
+        <span class="box-red">SOY</span>
+        <span class="box-white">SERGIO BUSTOS</span>
+      </h1>
+      
+      <div class="typewriter-container">
+        <span id="typewriter-text"></span><span class="cursor">█</span>
+      </div>
+
+      <p class="bio">
+        Desarrollador Web en formación en el programa <strong>Skillnest</strong>. Me especializo en construir aplicaciones funcionales integrando la lógica de backend en <strong>Python y Flask</strong>, estructuración de bases de datos relacionales en <strong>MySQL</strong> y maquetación web limpia e interactiva.
+      </p>
+
+      <div class="hero-actions">
+        <a href="https://www.linkedin.com/in/sergio-bustos-859973414/" target="_blank" rel="noopener noreferrer" class="btn p5-btn-red">LINKEDIN 🔗</a>
+        <a href="https://github.com/mariiono12" target="_blank" rel="noopener" class="btn p5-btn-black">GITHUB 🐙</a>
       </div>
     </section>
 
-    <section id="enfoque" class="section fade-in p5-panel pos-right">
-      <p class="eyebrow">LO QUE ME MUEVE</p>
-      <h2 class="p5-heading">De la idea a una solución web</h2>
-      <p class="section-subtext">Me gusta entender cómo se conectan las piezas de una aplicación y construir experiencias completas, desde los datos hasta la interfaz.</p>
-      <div class="focus-grid">
-        <article class="focus-card">
-          <span class="focus-number">01</span>
-          <h3>Lógica y backend</h3>
-          <p>Rutas, validaciones y funcionalidades con Python y Flask para resolver necesidades concretas.</p>
-        </article>
-        <article class="focus-card">
-          <span class="focus-number">02</span>
-          <h3>Datos conectados</h3>
-          <p>Modelado relacional y consultas MySQL para organizar información con sentido.</p>
-        </article>
-        <article class="focus-card">
-          <span class="focus-number">03</span>
-          <h3>Experiencia web</h3>
-          <p>Estructuras claras e interfaces responsive con HTML, CSS y JavaScript.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- Proyectos Destacados -->
+    <!-- 2. Proyectos Destacados (Zig-Zag) -->
     <section id="proyectos" class="section fade-in p5-panel pos-right">
       <h2 class="p5-heading">Proyectos desarrollados</h2>
-      <p class="section-subtext">Proyectos prácticos donde aplico fundamentos de desarrollo full stack:</p>
+      <p class="section-subtext">Sistemas web desarrollados durante el programa Skillnest:</p>
 
       <div class="projects-asymmetric-container">
 
         <article class="project-card card-left">
           <div class="card-badge">BACKEND / SQL</div>
-          <img class="project-image" src="assets/images/INSCRIPCION_MUCHO.png" alt="Vista previa del proyecto de registro de relaciones muchos a muchos" loading="lazy">
           <div class="project-info">
-            <p class="project-kicker">01 / FLASK + MYSQL</p>
-            <h3>Registro muchos a muchos</h3>
+            <h3>REGISTRO MUCHOS A MUCHOS</h3>
             <p>Aplicación en Flask para gestionar asociaciones relacionales complejas de muchos a muchos en MySQL, con sistema de registro, validación de datos y autenticación de usuarios.</p>
             <div class="tags">
               <span>Python</span>
@@ -125,10 +102,8 @@
 
         <article class="project-card card-right">
           <div class="card-badge">FULL STACK</div>
-          <img class="project-image" src="assets/images/bookhub.png" alt="Vista previa de la plataforma BookHub" loading="lazy">
           <div class="project-info">
-            <p class="project-kicker">02 / COMUNIDAD LECTORA</p>
-            <h3>BookHub</h3>
+            <h3>BOOKHUB</h3>
             <p>Plataforma para comunidad de lectura y gestión de catálogo desarrollada con Flask. Incluye sistema de reseñas, gestión de usuarios y operaciones CRUD integradas a MySQL Workbench.</p>
             <div class="tags">
               <span>Python</span>
@@ -145,80 +120,125 @@
       </div>
     </section>
 
-    <!-- Tecnologías y Habilidades -->
+    <!-- 3. Tecnologías y Habilidades -->
     <section id="tecnologias" class="section fade-in p5-panel pos-left">
       <h2 class="p5-heading">Tecnologías y habilidades</h2>
-      <p class="section-subtext">Herramientas que estoy utilizando y fortaleciendo en mis proyectos:</p>
+      <p class="section-subtext">Tecnologías y herramientas utilizadas en el desarrollo de aplicaciones web:</p>
       
       <div class="skills-mosaic-full">
         
-        <div class="skill-card card-skew-1" tabindex="0" aria-describedby="skill-python">
+        <div class="skill-card card-skew-1">
           <span class="skill-name">PYTHON</span>
           <span class="skill-level">Backend</span>
-          <div class="skill-tooltip" id="skill-python">
+          <div class="skill-tooltip">
             <strong>PYTHON</strong>
             <p>Lógica de servidor, programación orientada a objetos, scripts y estructuración de librerías.</p>
           </div>
         </div>
 
-        <div class="skill-card card-skew-2" tabindex="0" aria-describedby="skill-flask">
+        <div class="skill-card card-skew-2">
           <span class="skill-name">FLASK</span>
           <span class="skill-level">Framework</span>
-          <div class="skill-tooltip" id="skill-flask">
+          <div class="skill-tooltip">
             <strong>FLASK</strong>
-            <p>Rutas dinámicas, plantillas Jinja2, arquitectura MVC, gestión de sesiones y cookies.</p>
+            <p>Microframework de Python para construir aplicaciones web y gestionar rutas.</p>
           </div>
         </div>
 
-        <div class="skill-card card-skew-3" tabindex="0" aria-describedby="skill-mysql">
+        <div class="skill-card card-skew-3">
+          <span class="skill-name">PIPENV / PIP</span>
+          <span class="skill-level">Entornos y dependencias</span>
+          <div class="skill-tooltip">
+            <strong>PIPENV / PIP</strong>
+            <p>Gestión de paquetes, dependencias y entornos virtuales para proyectos Python.</p>
+          </div>
+        </div>
+
+        <div class="skill-card card-skew-1">
+          <span class="skill-name">PYTHON-DOTENV</span>
+          <span class="skill-level">Configuración</span>
+          <div class="skill-tooltip">
+            <strong>PYTHON-DOTENV</strong>
+            <p>Carga variables de entorno desde archivos .env para separar la configuración y las credenciales del código.</p>
+          </div>
+        </div>
+
+        <div class="skill-card card-skew-2">
+          <span class="skill-name">FLASK-BCRYPT</span>
+          <span class="skill-level">Seguridad</span>
+          <div class="skill-tooltip">
+            <strong>FLASK-BCRYPT</strong>
+            <p>Generación y verificación de hashes seguros para proteger contraseñas.</p>
+          </div>
+        </div>
+
+        <div class="skill-card card-skew-3">
+          <span class="skill-name">JINJA2</span>
+          <span class="skill-level">Plantillas</span>
+          <div class="skill-tooltip">
+            <strong>JINJA2</strong>
+            <p>Renderizado de plantillas HTML dinámicas e integración de datos desde Flask.</p>
+          </div>
+        </div>
+
+        <div class="skill-card card-skew-3">
           <span class="skill-name">MYSQL</span>
           <span class="skill-level">Base de Datos</span>
-          <div class="skill-tooltip" id="skill-mysql">
+          <div class="skill-tooltip">
             <strong>MYSQL</strong>
             <p>Modelado ER, consultas relacionales, Joins y relaciones N:M complejas.</p>
           </div>
         </div>
 
-        <div class="skill-card card-skew-1" tabindex="0" aria-describedby="skill-html">
+        <div class="skill-card card-skew-1">
+          <span class="skill-name">PYMYSQL</span>
+          <span class="skill-level">Conector de base de datos</span>
+          <div class="skill-tooltip">
+            <strong>PYMYSQL</strong>
+            <p>Conexión de aplicaciones Python con bases de datos MySQL y ejecución de consultas.</p>
+          </div>
+        </div>
+
+        <div class="skill-card card-skew-1">
           <span class="skill-name">HTML5</span>
           <span class="skill-level">Frontend</span>
-          <div class="skill-tooltip" id="skill-html">
+          <div class="skill-tooltip">
             <strong>HTML5</strong>
             <p>Estructuración semántica de páginas web, accesibilidad y maquetación limpia.</p>
           </div>
         </div>
 
-        <div class="skill-card card-skew-3" tabindex="0" aria-describedby="skill-css">
+        <div class="skill-card card-skew-3">
           <span class="skill-name">CSS3</span>
           <span class="skill-level">Estilos</span>
-          <div class="skill-tooltip" id="skill-css">
+          <div class="skill-tooltip">
             <strong>CSS3</strong>
-            <p>Flexbox, Grid, animaciones customizadas, transformaciones y variables CSS.</p>
+            <p>CSS puro para maquetación, diseño adaptable, animaciones y estilos; incluye tipografías de Google Fonts.</p>
           </div>
         </div>
 
-        <div class="skill-card card-skew-2" tabindex="0" aria-describedby="skill-js">
+        <div class="skill-card card-skew-2">
           <span class="skill-name">JAVASCRIPT</span>
           <span class="skill-level">Lógica</span>
-          <div class="skill-tooltip" id="skill-js">
+          <div class="skill-tooltip">
             <strong>JAVASCRIPT</strong>
             <p>Manipulación dinámica del DOM, eventos asíncronos e interacción de usuario.</p>
           </div>
         </div>
 
-        <div class="skill-card card-skew-1" tabindex="0" aria-describedby="skill-git">
+        <div class="skill-card card-skew-1">
           <span class="skill-name">GIT</span>
           <span class="skill-level">DevOps</span>
-          <div class="skill-tooltip" id="skill-git">
+          <div class="skill-tooltip">
             <strong>GIT</strong>
-            <p>Control de versiones local, ramas, mergings y commits estructurados.</p>
+            <p>Control de versiones local, ramas y commits; configuración de archivos .gitignore.</p>
           </div>
         </div>
 
-        <div class="skill-card card-skew-3" tabindex="0" aria-describedby="skill-github">
+        <div class="skill-card card-skew-3">
           <span class="skill-name">GITHUB</span>
           <span class="skill-level">Nube</span>
-          <div class="skill-tooltip" id="skill-github">
+          <div class="skill-tooltip">
             <strong>GITHUB</strong>
             <p>Repositorios remotos, proyectos colaborativos, documentación y Pages.</p>
           </div>
@@ -227,55 +247,33 @@
       </div>
     </section>
 
-    <!-- Contacto -->
+    <!-- 4. Contacto -->
     <section id="contacto" class="section fade-in p5-panel pos-center">
       <h2 class="p5-heading">Contacto</h2>
       
       <div class="calling-card-expanded">
         <div class="card-stamp">TAKE YOUR HEART</div>
-        <p class="calling-card-intro">¿Tienes una idea, una oportunidad o simplemente quieres conversar? Escríbeme y seguimos desde ahí.</p>
+        <p class="calling-card-intro">¿Hablamos de un proyecto o una oportunidad? Escríbeme directamente por correo.</p>
 
-        <form id="contact-form" class="p5-form">
-          <div class="form-group-row">
-            <div class="form-group">
-              <label for="name">NOMBRE / EMPRESA</label>
-              <input type="text" id="name" placeholder="Tu nombre..." required>
-            </div>
-            <div class="form-group">
-              <label for="email">CORREO ELECTRÓNICO</label>
-              <input type="email" id="email" placeholder="tu@correo.com..." required>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="subject">ASUNTO</label>
-            <input type="text" id="subject" placeholder="Propuesta laboral / Proyecto..." required>
-          </div>
-
-          <div class="form-group">
-            <label for="message">MENSAJE</label>
-            <textarea id="message" rows="3" placeholder="Escribe los detalles aquí..." required></textarea>
-          </div>
-
-          <p id="form-success-alert" class="form-success-alert" role="status" aria-live="polite"></p>
-
-          <button type="submit" id="btn-send-message" class="btn-send-p5">PREPARAR CORREO <span aria-hidden="true">↗</span></button>
-        </form>
+        <div class="contact-actions">
+          <a class="btn-send-p5" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=ian.bustos213@gmail.com&amp;su=Contacto%20desde%20mi%20portafolio&amp;body=Hola%20Sergio%2C%0A%0AMe%20gustar%C3%ADa%20conversar%20contigo%20sobre%3A%0A%0A" target="_blank" rel="noopener noreferrer">ESCRIBIR POR GMAIL ✉</a>
+          <a class="btn-email-default" href="mailto:ian.bustos213@gmail.com?subject=Contacto%20desde%20mi%20portafolio">ABRIR MI APLICACIÓN DE CORREO</a>
+          <p class="contact-note">Se abrirá un borrador dirigido a Sergio. Revisa y envía el mensaje desde tu correo.</p>
+        </div>
 
         <div class="email-direct-box">
           <span class="email-label">CORREO DIRECTO:</span>
           <a href="mailto:ian.bustos213@gmail.com" id="email-text" class="email-link">ian.bustos213@gmail.com</a>
           <button id="copy-btn" class="btn-copy" type="button" title="Copiar correo">📋 COPIAR</button>
         </div>
-        <span id="copy-message" class="copy-message" role="status" aria-live="polite"></span>
+        <span id="copy-message" class="copy-message">¡Correo copiado al portapapeles!</span>
       </div>
     </section>
 
   </main>
 
   <footer>
-    <p>© <span id="current-year">2026</span> Sergio Bustos · Hecho con dedicación y muchas líneas de código.</p>
-    <a href="#sobre-mi" class="back-to-top">VOLVER ARRIBA ↑</a>
+    <p>© 2026 - Creado por <span>Sergio Bustos</span> durante el programa Skillnest.</p>
   </footer>
 
   <script src="assets/js/main.js"></script>
