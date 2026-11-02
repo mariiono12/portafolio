@@ -32,10 +32,6 @@ body {
   line-height: 1.65;
 }
 
-body.menu-open {
-  overflow: hidden;
-}
-
 ::selection {
   background: var(--red);
   color: #fff;
@@ -88,7 +84,7 @@ button:focus-visible {
   display: flex;
   min-height: 76px;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 30px;
   padding: 0 clamp(22px, 5vw, 76px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.13);
@@ -112,67 +108,6 @@ button:focus-visible {
 .wordmark-dot,
 .footer-mark span {
   color: var(--red);
-}
-
-.site-nav {
-  display: flex;
-  align-items: center;
-  gap: clamp(18px, 3vw, 42px);
-}
-
-.nav-link,
-.nav-cta {
-  position: relative;
-  color: #d3d0ca;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 1px;
-  text-decoration: none;
-  text-transform: uppercase;
-}
-
-.nav-link::after {
-  position: absolute;
-  right: 0;
-  bottom: -8px;
-  left: 0;
-  height: 2px;
-  transform: scaleX(0);
-  transform-origin: left;
-  background: var(--red);
-  content: "";
-  transition: transform 180ms ease;
-}
-
-.nav-link:hover,
-.nav-link.is-active {
-  color: var(--white);
-}
-
-.nav-link:hover::after,
-.nav-link.is-active::after {
-  transform: scaleX(1);
-}
-
-.nav-cta {
-  padding: 12px 17px;
-  transform: skewX(-9deg);
-  background: var(--red);
-  color: #fff;
-  transition: background 180ms ease, transform 180ms ease;
-}
-
-.nav-cta:hover {
-  transform: skewX(-9deg) translateY(-2px);
-  background: var(--red-dark);
-}
-
-.nav-cta span {
-  margin-left: 7px;
-}
-
-.menu-toggle {
-  display: none;
 }
 
 .command-wheel {
@@ -1263,6 +1198,10 @@ button:focus-visible {
   pointer-events: none;
 }
 
+.transition-curtain.is-active {
+  pointer-events: auto;
+}
+
 .transition-curtain span {
   transform: skewX(-8deg);
   color: #fff;
@@ -1283,7 +1222,49 @@ button:focus-visible {
 
 @media (max-width: 1100px) {
   .command-wheel {
+    top: auto;
+    right: 50%;
+    bottom: calc(12px + env(safe-area-inset-bottom));
+    display: flex;
+    width: min(460px, calc(100vw - 24px));
+    height: 62px;
+    align-items: center;
+    gap: 5px;
+    padding: 6px;
+    transform: translateX(50%);
+    border: 1px solid rgba(242, 12, 35, 0.8);
+    border-radius: 9px;
+    background: rgba(17, 17, 17, 0.96);
+    box-shadow: 0 8px 26px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(12px);
+    pointer-events: auto;
+  }
+
+  .command-wheel-orbit,
+  .command-wheel-center {
     display: none;
+  }
+
+  .command-wheel-link {
+    position: relative;
+    top: auto !important;
+    left: auto !important;
+    width: 25%;
+    height: 46px;
+    min-height: 46px;
+    flex: 1 1 0;
+    transform: skewX(-4deg);
+    font-size: clamp(8px, 2vw, 10px);
+    letter-spacing: 0.35px;
+    transition: background 160ms ease, box-shadow 160ms ease, color 160ms ease;
+  }
+
+  .command-wheel-link span {
+    font-size: 8px;
+  }
+
+  body {
+    padding-bottom: calc(82px + env(safe-area-inset-bottom));
   }
 }
 
@@ -1327,84 +1308,6 @@ button:focus-visible {
 
   .wordmark {
     font-size: 21px;
-  }
-
-  .menu-toggle {
-    display: inline-flex;
-    min-height: 42px;
-    align-items: center;
-    gap: 11px;
-    padding: 0 12px;
-    transform: skewX(-7deg);
-    border: 1px solid #48413d;
-    background: transparent;
-    color: #fff;
-    cursor: pointer;
-  }
-
-  .menu-toggle-label {
-    font-family: var(--display);
-    font-size: 12px;
-    letter-spacing: 1px;
-  }
-
-  .menu-toggle-icon {
-    display: grid;
-    gap: 4px;
-  }
-
-  .menu-toggle-icon i {
-    display: block;
-    width: 17px;
-    height: 2px;
-    background: var(--red);
-    transition: transform 160ms ease;
-  }
-
-  .menu-toggle[aria-expanded="true"] .menu-toggle-icon i:first-child {
-    transform: translateY(3px) rotate(45deg);
-  }
-
-  .menu-toggle[aria-expanded="true"] .menu-toggle-icon i:last-child {
-    transform: translateY(-3px) rotate(-45deg);
-  }
-
-  .site-nav {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    left: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    padding: 8px 21px 20px;
-    transform: translateY(-8px);
-    border-bottom: 1px solid #393430;
-    background: rgba(17, 17, 17, 0.98);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 160ms ease, transform 160ms ease, visibility 160ms ease;
-  }
-
-  .site-nav.is-open {
-    transform: translateY(0);
-    opacity: 1;
-    visibility: visible;
-  }
-
-  .nav-link {
-    padding: 13px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .nav-link::after {
-    display: none;
-  }
-
-  .nav-cta {
-    align-self: flex-start;
-    margin-top: 15px;
   }
 
   .section-wrap {

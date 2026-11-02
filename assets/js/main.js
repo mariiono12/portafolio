@@ -1,7 +1,6 @@
-const menuToggle = document.getElementById('menu-toggle');
-const siteNav = document.getElementById('site-nav');
 const commandWheelLinks = document.querySelectorAll('.command-wheel-link[href^="#"]');
 const curtain = document.getElementById('transition-curtain');
+const curtainLabel = curtain ? curtain.querySelector('span') : null;
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 function updateCommandWheel(selectedLink) {
@@ -27,43 +26,23 @@ function updateCommandWheel(selectedLink) {
 }
 
 if (commandWheelLinks.length > 0) {
-  updateCommandWheel(commandWheelLinks[0]);
+  const initialSection = window.location.hash || '#sobre-mi';
+  const initialLink = Array.from(commandWheelLinks).find(link => link.hash === initialSection);
+  updateCommandWheel(initialLink || commandWheelLinks[0]);
 }
 
-function closeMenu() {
-  if (!menuToggle || !siteNav) return;
-
-  menuToggle.setAttribute('aria-expanded', 'false');
-  siteNav.classList.remove('is-open');
-  document.body.classList.remove('menu-open');
-}
-
-if (menuToggle && siteNav) {
-  menuToggle.addEventListener('click', () => {
-    const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
-    menuToggle.setAttribute('aria-expanded', String(!isOpen));
-    siteNav.classList.toggle('is-open', !isOpen);
-    document.body.classList.toggle('menu-open', !isOpen);
-  });
-
-  document.addEventListener('keydown', event => {
-    if (event.key === 'Escape') closeMenu();
-  });
-}
-
-document.querySelectorAll('.site-nav a[href^="#"], .command-wheel-link[href^="#"]').forEach(link => {
+commandWheelLinks.forEach(link => {
   link.addEventListener('click', event => {
     const targetId = link.getAttribute('href');
     const target = targetId ? document.querySelector(targetId) : null;
 
-    closeMenu();
-    if (link.classList.contains('command-wheel-link')) {
-      updateCommandWheel(link);
-    }
+    if (!target) return;
+    updateCommandWheel(link);
 
-    if (!target || !curtain || reduceMotion) return;
+    if (!curtain || reduceMotion) return;
 
     event.preventDefault();
+    if (curtainLabel) curtainLabel.textContent = link.textContent.replace(/^\s*\d+\s*/, '').trim();
     curtain.classList.remove('is-active');
     void curtain.offsetWidth;
     curtain.classList.add('is-active');
@@ -73,7 +52,10 @@ document.querySelectorAll('.site-nav a[href^="#"], .command-wheel-link[href^="#"
       target.scrollIntoView({ behavior: 'auto', block: 'start' });
     }, 255);
 
-    window.setTimeout(() => curtain.classList.remove('is-active'), 700);
+    window.setTimeout(() => {
+      curtain.classList.remove('is-active');
+      if (curtainLabel) curtainLabel.textContent = 'TAKE YOUR TIME';
+    }, 700);
   });
 });
 
@@ -82,10 +64,6 @@ if ('IntersectionObserver' in window) {
   const sectionObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
-
-      document.querySelectorAll('.site-nav .nav-link').forEach(link => {
-        link.classList.toggle('is-active', link.hash === `#${entry.target.id}`);
-      });
 
       const activeSectionHash = entry.target.id === 'inicio' ? '#sobre-mi' : `#${entry.target.id}`;
       const activeWheelLink = Array.from(commandWheelLinks).find(link => link.hash === activeSectionHash);
